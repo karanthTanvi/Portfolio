@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 
 const DEFAULT_SIZE = 40
 const HOVER_SIZE = 100
+const HOVER_SELECTOR = 'a, button, .cursor-hover'
 
 export default function CustomCursor() {
   const dot = useRef(null)
@@ -22,8 +23,13 @@ export default function CustomCursor() {
       }
     }
 
-    const enter = () => { size = HOVER_SIZE }
-    const leave = () => { size = DEFAULT_SIZE }
+    const onOver = (e) => {
+      if (e.target.closest(HOVER_SELECTOR)) size = HOVER_SIZE
+    }
+    const onOut = (e) => {
+      const el = e.target.closest(HOVER_SELECTOR)
+      if (el && !el.contains(e.relatedTarget)) size = DEFAULT_SIZE
+    }
 
     const tick = () => {
       currentSize += (size - currentSize) * 0.15
@@ -36,19 +42,14 @@ export default function CustomCursor() {
     raf = requestAnimationFrame(tick)
 
     window.addEventListener('mousemove', move)
-    const interactive = document.querySelectorAll('a, button, .cursor-hover')
-    interactive.forEach(el => {
-      el.addEventListener('mouseenter', enter)
-      el.addEventListener('mouseleave', leave)
-    })
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
 
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('mousemove', move)
-      interactive.forEach(el => {
-        el.removeEventListener('mouseenter', enter)
-        el.removeEventListener('mouseleave', leave)
-      })
+      document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mouseout', onOut)
     }
   }, [])
 

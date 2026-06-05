@@ -152,8 +152,8 @@ export default function Hero() {
           style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}
         >
           <p style={label}>Current</p>
-          <p style={detail}>Masters of IT (Interaction Design)</p>
-          <p style={detail}>UTS, Sydney (2026)</p>
+          <p style={detail}>Masters of IT - Interaction Design, UTS (2026)</p>
+          <p style={detail}>Sydney · Full working rights</p>
         </motion.div>
 
         <motion.div

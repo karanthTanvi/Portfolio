@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi'
 import Logo from './Logo'
+import { Link } from 'react-router-dom'
 
-const NAV_ITEMS = ['Work', 'About', 'Resume']
+const NAV_ITEMS = ['WORK', 'ABOUT', 'RESUME']
+const RESUME_URL = 'https://drive.google.com/file/d/1l6OC_-RLi5-5fFJYAA_rEMgJh5SyHUsF/view?usp=sharing'
 
 export default function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false)
@@ -23,36 +25,6 @@ export default function Navbar({ theme, toggleTheme }) {
   return (
     <>
       <style>{`
-        .nav-link {
-          position: relative;
-          display: inline-block;
-          padding: 0.5rem 0.25rem;
-          font-size: 0.85rem;
-          font-weight: 400;
-          color: var(--text);
-          text-decoration: none;
-          letter-spacing: 0.02em;
-          transition: color 0.3s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-        }
-        .nav-link:hover { color: var(--text); }
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: calc(0.5rem - 4px);
-          left: 0.25rem;
-          right: 0.25rem;
-          width: auto;
-          height: 1px;
-          background: var(--text);
-          transform: scaleX(0);
-          transform-origin: left center;
-          transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-        }
-        .nav-link:hover::after { transform: scaleX(1); }
-
         .nav-bar {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -63,21 +35,64 @@ export default function Navbar({ theme, toggleTheme }) {
           padding: 1.5rem 4rem;
           transition: background 0.4s ease, border-color 0.4s ease;
         }
+        .nav-logo {
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          padding: 0.5rem;
+          margin: -0.5rem;
+        }
         .nav-desktop {
           display: flex;
           align-items: center;
           gap: 3rem;
         }
+        .nav-link {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.5rem 0.25rem;
+          font-size: 0.85rem;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+          color: var(--text);
+          text-decoration: none;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: calc(0.5rem - 4px);
+          left: 0.25rem;
+          right: 0.25rem;
+          height: 1px;
+          background: var(--text);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .nav-theme-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: none;
+          border: none;
+          padding: 4px;
+          border-radius: 50%;
+          color: var(--text);
+          cursor: pointer;
+        }
         .nav-mobile-trigger {
           display: none;
+          align-items: center;
+          justify-content: center;
           background: none;
           border: none;
           color: var(--text);
           cursor: pointer;
           padding: 0.5rem;
           margin: -0.5rem;
-          align-items: center;
-          justify-content: center;
         }
 
         .mobile-menu {
@@ -104,6 +119,7 @@ export default function Navbar({ theme, toggleTheme }) {
           display: flex;
           align-items: center;
           gap: 0.75rem;
+          align-self: flex-start;
           background: none;
           border: 1px solid var(--border);
           color: var(--text);
@@ -112,7 +128,6 @@ export default function Navbar({ theme, toggleTheme }) {
           font-size: 1rem;
           margin-top: 1.25rem;
           cursor: pointer;
-          align-self: flex-start;
         }
 
         @media (max-width: 900px) {
@@ -137,53 +152,29 @@ export default function Navbar({ theme, toggleTheme }) {
           borderBottom: scrolled && !menuOpen ? '1px solid var(--border)' : '1px solid transparent',
         }}
       >
-        {/* <a href="#" onClick={() => setMenuOpen(false)} style={{
-          fontWeight: 600,
-          fontSize: '1rem',
-          letterSpacing: '-0.02em',
-          color: 'var(--text)',
-          textDecoration: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          lineHeight: 1,
-          padding: '0.5rem',
-          margin: '-0.5rem',
-        }}>
-          <span style={{
-            width: 10, height: 10,
-            borderRadius: '50%',
-            background: 'var(--text)',
-            display: 'inline-block',
-          }} />
-          TK
-        </a> */}
-
-        <a href="#" onClick={() => setMenuOpen(false)} style={{
-  textDecoration: 'none',
-  display: 'inline-flex',
-  alignItems: 'center',
-  padding: '0.5rem',
-  margin: '-0.5rem',
-}} aria-label="Home">
-  <Logo size={36} />
-</a>
+        <Link
+          to="/"
+          onClick={() => {
+            setMenuOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          className="nav-logo"
+          aria-label="Home"
+        >
+          <Logo size={36} />
+        </Link>
 
         <div className="nav-desktop">
-          {NAV_ITEMS.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="nav-link">{item}</a>
-          ))}
-          <button onClick={toggleTheme} aria-label="Toggle theme" style={{
-            background: 'none',
-            border: 'none',
-            padding: '4px',
-            color: 'var(--text)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '50%',
-            cursor: 'pointer',
-          }}>
+          {NAV_ITEMS.map((item) =>
+            item === 'RESUME' ? (
+              <a key={item} href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="nav-link cursor-hover">
+                {item}
+              </a>
+            ) : (
+              <Link key={item} to={`/#${item.toLowerCase()}`} className="nav-link cursor-hover">{item}</Link>
+            )
+          )}
+          <button onClick={toggleTheme} aria-label="Toggle theme" className="nav-theme-btn cursor-hover">
             <motion.div
               key={theme}
               initial={{ rotate: -90, opacity: 0 }}
@@ -223,7 +214,9 @@ export default function Navbar({ theme, toggleTheme }) {
             {NAV_ITEMS.map((item, i) => (
               <motion.a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === 'RESUME' ? RESUME_URL : `#${item.toLowerCase()}`}
+                target={item === 'RESUME' ? '_blank' : undefined}
+                rel={item === 'RESUME' ? 'noopener noreferrer' : undefined}
                 className="mobile-link"
                 onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, y: 16 }}

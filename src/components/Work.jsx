@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import remindVideo from '../assets/thumbnails/remind.webm'
+import { Link } from 'react-router-dom'
+import remindVideo from '../assets/remind/remind.webm'
 import { useRef, useEffect } from 'react'
 
 const projects = [
@@ -11,6 +12,7 @@ const projects = [
     year: '2024',
     media: remindVideo,
     type: 'video',
+    path: '/work/remind',
   },
   {
     id: '02',
@@ -19,6 +21,7 @@ const projects = [
     tags: ['AI', 'UX Research', 'Product Design'],
     year: '2024',
     image: null,
+    path: '/work/ai-usability',
   },
   {
     id: '03',
@@ -27,6 +30,7 @@ const projects = [
     tags: ['User Research', 'Strategy', 'Product Management'],
     year: '2023',
     image: null,
+    path: '/work/first-revenue',
   },
   {
     id: '04',
@@ -35,6 +39,7 @@ const projects = [
     tags: ['Tag', 'Tag', 'Tag'],
     year: '2023',
     image: null,
+    path: '/work/project-four',
   },
 ]
 
@@ -68,41 +73,41 @@ function ProjectCard({ project, index }) {
   }, [])
 
   return (
-    <motion.article
-      className="project-card cursor-hover"
+    <motion.div
       variants={tileVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay: (index % 2) * 0.08 }}
     >
-      <div className="tile-visual">
-        {project.media && project.type === 'video' ? (
-          <video
-            ref={videoRef}
-            src={project.media}
-            className="project-image"
-            loop
-            muted
-            playsInline
-          />
-        ) : project.media ? (
-          <img src={project.media} alt={project.name} className="project-image" />
-        ) : (
-          <span className="project-placeholder">{project.name}</span>
-        )}
-      </div>
-      <div className="tile-info">
-        {/* <span className="project-meta">{project.id} · {project.year}</span> */}
-        <h3 className="project-name">{project.name}</h3>
-        <p className="project-description">{project.description}</p>
-        <div className="project-tags">
-          {project.tags.map((tag) => (
-            <span key={tag} className="project-tag">{tag}</span>
-          ))}
+      <Link to={project.path} className="project-card cursor-hover">
+        <div className="tile-visual">
+          {project.media && project.type === 'video' ? (
+            <video
+              ref={videoRef}
+              src={project.media}
+              className="project-image"
+              loop
+              muted
+              playsInline
+            />
+          ) : project.media ? (
+            <img src={project.media} alt={project.name} className="project-image" />
+          ) : (
+            <span className="project-placeholder">{project.name}</span>
+          )}
         </div>
-      </div>
-    </motion.article>
+        <div className="tile-info">
+          <h3 className="project-name">{project.name}</h3>
+          <p className="project-description">{project.description}</p>
+          <div className="project-tags">
+            {project.tags.map((tag) => (
+              <span key={tag} className="project-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   )
 }
 
@@ -121,6 +126,8 @@ export default function Work() {
           flex-direction: column;
           gap: 1.25rem;
           cursor: pointer;
+          text-decoration: none;
+          color: inherit;
         }
         .tile-visual {
           background: var(--surface-secondary);
