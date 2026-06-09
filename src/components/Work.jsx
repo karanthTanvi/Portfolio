@@ -214,6 +214,7 @@ export default function Work() {
             padding: 4rem 1.5rem;
             gap: 2.5rem;
           }
+          .tile-visual { aspect-ratio: 3 / 4; } 
         }
       `}</style>
 

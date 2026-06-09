@@ -223,6 +223,7 @@ export default function Work() {
         }
         @media (max-width: 720px) {
           .work-section { padding: 4rem 1.5rem; }
+          .tile-visual { aspect-ratio: 3 / 4; } 
         }
       `}</style>
 

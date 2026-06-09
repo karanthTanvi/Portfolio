@@ -592,7 +592,8 @@ export default function Remind() {
 
 
         @media (max-width: 900px) { .screen-gallery { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .screen-gallery { grid-template-columns: 1fr; } }
+        @media (max-width: 560px) { .screen-gallery { grid-template-columns: repeat(2, 1fr); gap: 0.75rem;} .design-comparison {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;} .design-comparison figure { max-width: none; } }
 
         @media (max-width: 700px) { .grounding-grid { grid-template-columns: 1fr; } }
         @media (max-width: 600px) {

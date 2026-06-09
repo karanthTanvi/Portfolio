@@ -22,6 +22,15 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  const goToSection = (e, id) => {
+    setMenuOpen(false)
+    if (window.location.pathname === '/') {
+      e.preventDefault()
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      window.history.replaceState(null, '', `/#${id}`)
+    }
+  }
+
   return (
     <>
       <style>{`
@@ -99,7 +108,7 @@ export default function Navbar({ theme, toggleTheme }) {
           position: fixed;
           inset: 0;
           z-index: 99;
-          background: var(--bg);
+          background: var(--bg-face);
           padding: 6rem 1.5rem 2.5rem;
           display: flex;
           flex-direction: column;
@@ -171,7 +180,14 @@ export default function Navbar({ theme, toggleTheme }) {
                 {item}
               </a>
             ) : (
-              <Link key={item} to={`/#${item.toLowerCase()}`} className="nav-link cursor-hover">{item}</Link>
+              <Link
+                key={item}
+                to={`/#${item.toLowerCase()}`}
+                className="nav-link cursor-hover"
+                onClick={(e) => goToSection(e, item.toLowerCase())}
+              >
+                {item}
+              </Link>
             )
           )}
           <button onClick={toggleTheme} aria-label="Toggle theme" className="nav-theme-btn cursor-hover">
@@ -218,7 +234,10 @@ export default function Navbar({ theme, toggleTheme }) {
                 target={item === 'RESUME' ? '_blank' : undefined}
                 rel={item === 'RESUME' ? 'noopener noreferrer' : undefined}
                 className="mobile-link"
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  if (item === 'RESUME') { setMenuOpen(false); return }
+                  goToSection(e, item.toLowerCase())
+                }}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
