@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { TbArrowLeft } from 'react-icons/tb'
+import { TbArrowLeft, TbArrowRight } from 'react-icons/tb'
 
-export default function CaseStudyShell({ sections, nextCaseStudy, children }) {
+export default function CaseStudyShell({ sections, prev, next, children }) {
   const flatSections = sections.flatMap((s) => s.children || [s])
   const indexMap = Object.fromEntries(flatSections.map((item, i) => [item.id, i + 1]))
 
@@ -123,6 +123,9 @@ export default function CaseStudyShell({ sections, nextCaseStudy, children }) {
           transition: gap 0.3s ease;
         }
         .case-study-nav-link:hover .case-study-nav-mainlabel { gap: 0.85rem; }
+        .case-study-nav-link.is-disabled { opacity: 0.4; cursor: default; }
+        .case-study-nav-link.is-disabled:hover { color: var(--text-muted); }
+        .case-study-nav-link.is-disabled:hover .case-study-nav-mainlabel { gap: 0.5rem; }
 
         @media (max-width: 900px) {
           .case-study-shell { grid-template-columns: 1fr; padding: 5rem 2rem 0; gap: 2rem; }
@@ -172,16 +175,24 @@ export default function CaseStudyShell({ sections, nextCaseStudy, children }) {
       <div className="case-study-content">
         {children}
         <div className="case-study-nav">
-          <Link to="/#work" className="case-study-nav-link case-study-nav-prev cursor-hover">
-            <span className="case-study-nav-sublabel">Back to</span>
-            <span className="case-study-nav-mainlabel"><TbArrowLeft size={16} /> Home</span>
-          </Link>
-          {/* {nextCaseStudy && (
-            <Link to={nextCaseStudy.path} className="case-study-nav-link case-study-nav-next cursor-hover">
-              <span className="case-study-nav-sublabel">Next project</span>
-              <span className="case-study-nav-mainlabel">{nextCaseStudy.name} <TbArrowRight size={16} /></span>
+          {prev && (
+            <Link to={prev.path} className="case-study-nav-link case-study-nav-prev cursor-hover">
+              <span className="case-study-nav-sublabel">{prev.sublabel}</span>
+              <span className="case-study-nav-mainlabel"><TbArrowLeft size={16} /> {prev.label}</span>
             </Link>
-          )} */}
+          )}
+          {next &&
+            (next.path ? (
+              <Link to={next.path} className="case-study-nav-link case-study-nav-next cursor-hover">
+                <span className="case-study-nav-sublabel">{next.sublabel}</span>
+                <span className="case-study-nav-mainlabel">{next.label} <TbArrowRight size={16} /></span>
+              </Link>
+            ) : (
+              <div className="case-study-nav-link case-study-nav-next is-disabled" aria-disabled="true">
+                <span className="case-study-nav-sublabel">{next.sublabel}</span>
+                <span className="case-study-nav-mainlabel">{next.label} <TbArrowRight size={16} /></span>
+              </div>
+            ))}
         </div>
       </div>
     </main>

@@ -3,11 +3,13 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 // import Work from './components/Work'  
-import Work from './components/WorkTemp'  
+import Work from './components/Work'  
 import About from './components/About'  
 import Footer from './components/Footer'
 import ShaderEffect from './components/ShaderEffect'
 import Remind from './case-studies/Remind'
+import FirstRevenue from './case-studies/FirstRevenue'
+import Wishcake from './case-studies/Wishcake'
 import './index.css'
 import ScrollToAnchor from './components/ScrollToAnchor'
 
@@ -39,6 +41,8 @@ export default function App() {
           }
         />
         <Route path="/work/remind" element={<Remind />} />
+        <Route path="/work/first-revenue" element={<FirstRevenue />} />
+        <Route path="/work/wishcake" element={<Wishcake />} />
       </Routes>
 
       

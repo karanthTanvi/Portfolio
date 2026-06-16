@@ -50,7 +50,8 @@ const sections = [
   { id: 'reflection', label: 'Reflection' },
 ]
 
-const nextCaseStudy = { name: 'AI for Usability Testing', path: '/work/ai-usability' }
+const navPrev = { sublabel: 'Back to', label: 'Home', path: '/#work' }
+const navNext = { sublabel: 'Next case study', label: 'First Revenue', path: '/work/first-revenue' }
 
 const metadata = [
   { label: 'Project', value: 'Apple Foundation Program' },
@@ -137,7 +138,7 @@ export default function Remind() {
     return () => cancelAnimationFrame(raf)
   }, [])
   return (
-    <CaseStudyShell sections={sections} nextCaseStudy={nextCaseStudy}>
+    <CaseStudyShell sections={sections} prev={navPrev} next={navNext}>
       <style>{`
         .cs-section {
           padding-bottom: 4rem;
