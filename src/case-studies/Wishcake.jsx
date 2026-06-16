@@ -13,7 +13,7 @@ export default function Wishcake() {
           Wishcake
         </h1>
         <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(1.125rem, 1.6vw, 1.375rem)', lineHeight: 1.4, margin: 0 }}>
-          My first vibecoded app, from ideation to hosting. Case study coming soon.
+          A vibecoded web-app, from ideation to hosting. Case study coming soon.
         </p>
       </section>
     </CaseStudyShell>
