@@ -28,7 +28,7 @@ const projects = [
   {
     id: '03',
     name: 'Wishcake',
-    description: 'My first vibecoded app, taken from ideation all the way to hosting.',
+    description: 'A vibecoded web-app, taken from ideation all the way to hosting.',
     tags: ['Claude Code', 'Face Tracking', 'Vercel'],
     year: '2025',
     media: wishcakeVideo,
