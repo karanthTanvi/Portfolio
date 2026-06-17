@@ -114,7 +114,7 @@ export default function Hero() {
           style={{ ...headline, color: 'var(--text)', margin: 0 }}
         >
           <VariableProximity
-            label="Product Designer"
+            label="Product Manager"
             fromFontVariationSettings="'wght' 600"
             toFontVariationSettings="'wght' 900"
             containerRef={containerRef}
