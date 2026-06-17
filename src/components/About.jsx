@@ -108,11 +108,11 @@ export default function About() {
         <h2 className="about-heading">I'm Tanvi, a Product Manager based in Sydney.</h2>
         {/* <p className="about-availability">Sydney, Australia · Full working rights</p> */}
         <p className="about-bio">
-            My journey to product design started as a programmer. I started out implementing code, then moved along the chain into designing the product at startups, and then did my Master's in Interaction Design at UTS, building academic and research credentials using AI in the product design workflow. 
+            My journey to product started as a programmer. I started out implementing code, then moved along the chain into designing the product at startups, and then did my Master's of IT (Interaction Design) at UTS, building academic and research credentials using AI in the product workflow. 
 
         </p>
         <p className="about-bio">
-            I have three years of experience across enterprises and startups; my journey includes helping a startup achieve monetization through rigorous user research along with helping another build a product that landed it a pilot with an enterprise firm within two months of launch.
+            I have three years of experience across enterprises and startups; my journey includes helping a startup achieve monetization through rigorous user research and product thinking along with helping another build a product that landed it a pilot with an enterprise firm within two months of launch.
 
         </p>
         <p className="about-bio">
