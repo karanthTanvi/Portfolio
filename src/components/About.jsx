@@ -105,7 +105,7 @@ export default function About() {
         transition={{ delay: 0.1 }}
       >
         {/* <span className="about-label">About</span> */}
-        <h2 className="about-heading">I'm Tanvi, a Product Designer based in Sydney.</h2>
+        <h2 className="about-heading">I'm Tanvi, a Product Manager based in Sydney.</h2>
         {/* <p className="about-availability">Sydney, Australia · Full working rights</p> */}
         <p className="about-bio">
             My journey to product design started as a programmer. I started out implementing code, then moved along the chain into designing the product at startups, and then did my Master's in Interaction Design at UTS, building academic and research credentials using AI in the product design workflow. 
