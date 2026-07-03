@@ -108,16 +108,12 @@ export default function About() {
         <h2 className="about-heading">Hi! I'm Tanvi.</h2>
         {/* <p className="about-availability">Sydney, Australia · Full working rights</p> */}
         <p className="about-bio">
-            My journey to product started as a programmer. I started out implementing code, then moved along the chain into designing the product at startups, and then did my Master's of IT (Interaction Design) at UTS, building academic and research credentials using AI in the product workflow. 
-
+            I came to product through code. I started as a programmer, moved into designing products at startups, and completed a Master's of IT (Interaction Design) at UTS, where I worked on design projects end-to-end and researched how designers can use AI in their workflow.
         </p>
         <p className="about-bio">
-            I have three years of experience across enterprises and startups; my journey includes helping a startup achieve monetization through rigorous user research and product thinking along with helping another build a product that landed it a pilot with an enterprise firm within two months of launch.
-
-        </p>
+            Over three years across startups and enterprises, I've helped one startup find its path to monetization through user research and product thinking, and helped another land an enterprise pilot within two months of launch.        </p>
         <p className="about-bio">
-            I love taking a product from an idea on a napkin to a production-grade system driving real impact in businesses and consumers and I am comfortable from ideating in a white-board all the way to the building the code that goes underneath.
-        </p>
+            I enjoy taking a product all the way from an idea on a napkin to something real that drives impact for businesses and the people who use it. When I'm not building products, I'm probably cooking, or deep in whatever creative hobby I've picked up that fortnight: pottery, painting, and now vibe coding past my bed time.    </p>
         {/* <div className="about-tags">
           {focus.map((f) => (
             <span key={f} className="about-tag">{f}</span>

@@ -22,6 +22,7 @@
   --footer-text: #F5F5F7;
   --footer-muted: #86868B;
   --navbar-bg: rgba(251, 251, 253, 0.72);
+  --selection: #FF6ECF;
 }
 
 [data-theme='dark'] {
@@ -40,6 +41,7 @@
   --footer-text: #F5F5F7;
   --footer-muted: #86868B;
   --navbar-bg: rgba(29, 29, 31, 0.72);
+  --selection: #FF14B1;
 }
 
 html {
@@ -61,8 +63,12 @@ body {
 }
 
 ::selection {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--selection);
+  color: #1D1D1F;
+}
+::-moz-selection {
+  background: var(--selection);
+  color: #1D1D1F;
 }
 
 a {
