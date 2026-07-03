@@ -51,7 +51,7 @@ const sections = [
 ]
 
 const navPrev = { sublabel: 'Back to', label: 'Home', path: '/#work' }
-const navNext = { sublabel: 'Next case study', label: 'First Revenue', path: '/work/first-revenue' }
+const navNext = { sublabel: 'Next case study', label: 'qrew', path: '/work/qrew' }
 
 const metadata = [
   { label: 'Project', value: 'Apple Foundation Program' },
@@ -125,17 +125,51 @@ export default function Remind() {
   useEffect(() => {
     const el = marqueeRef.current
     if (!el) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // click-and-drag to scroll horizontally
+    let down = false
+    let startX = 0
+    let startScroll = 0
+    const onDown = (e) => {
+      down = true
+      pausedRef.current = true
+      startX = e.pageX
+      startScroll = el.scrollLeft
+      el.classList.add('is-dragging')
+    }
+    const onMove = (e) => {
+      if (!down) return
+      e.preventDefault()
+      el.scrollLeft = startScroll - (e.pageX - startX)
+    }
+    const onUp = () => {
+      down = false
+      pausedRef.current = false
+      el.classList.remove('is-dragging')
+    }
+    el.addEventListener('pointerdown', onDown)
+    el.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+
+    // auto-scroll drift (skipped for reduced motion)
     let raf
-    const step = () => {
-      if (!pausedRef.current) {
-        el.scrollLeft += 0.5
-        if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft -= el.scrollWidth / 2
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const step = () => {
+        if (!pausedRef.current) {
+          el.scrollLeft += 0.5
+          if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft -= el.scrollWidth / 2
+        }
+        raf = requestAnimationFrame(step)
       }
       raf = requestAnimationFrame(step)
     }
-    raf = requestAnimationFrame(step)
-    return () => cancelAnimationFrame(raf)
+
+    return () => {
+      el.removeEventListener('pointerdown', onDown)
+      el.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [])
   return (
     <CaseStudyShell sections={sections} prev={navPrev} next={navNext}>
@@ -543,9 +577,14 @@ export default function Remind() {
           margin: 2.5rem 0;
           scrollbar-width: none;        /* Firefox */
           -ms-overflow-style: none;     /* old Edge */
+          cursor: grab;
+          touch-action: pan-y;
           -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
         }
+        .outcome-marquee.is-dragging { cursor: grabbing; }
+        .outcome-marquee.is-dragging img,
+        .outcome-marquee.is-dragging video { pointer-events: none; }
         .outcome-marquee::-webkit-scrollbar { display: none; } /* Chrome/Safari */
         .outcome-track { display: flex; width: max-content; }
         .outcome-track figure { margin: 0 1rem 0 0; flex: 0 0 auto; }

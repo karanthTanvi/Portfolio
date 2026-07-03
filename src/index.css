@@ -27,7 +27,7 @@
 [data-theme='dark'] {
   --bg: transparent;
   --bg-face: #0a0a0a;
-  --surface-secondary: rgb(16, 16, 16);
+  --surface-secondary: rgb(22, 22, 22);
   --text: #F5F5F7;
   --text-muted: #A1A1A6;
   --text-tertiary: rgba(235, 235, 245, 0.3);

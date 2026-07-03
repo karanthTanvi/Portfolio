@@ -105,7 +105,7 @@ export default function About() {
         transition={{ delay: 0.1 }}
       >
         {/* <span className="about-label">About</span> */}
-        <h2 className="about-heading">I'm Tanvi, a Product Manager based in Sydney.</h2>
+        <h2 className="about-heading">Hi! I'm Tanvi.</h2>
         {/* <p className="about-availability">Sydney, Australia · Full working rights</p> */}
         <p className="about-bio">
             My journey to product started as a programmer. I started out implementing code, then moved along the chain into designing the product at startups, and then did my Master's of IT (Interaction Design) at UTS, building academic and research credentials using AI in the product workflow. 

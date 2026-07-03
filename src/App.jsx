@@ -10,6 +10,7 @@ import ShaderEffect from './components/ShaderEffect'
 import Remind from './case-studies/Remind'
 import FirstRevenue from './case-studies/FirstRevenue'
 import Wishcake from './case-studies/Wishcake'
+import Qrew from './case-studies/Qrew'
 import './index.css'
 import ScrollToAnchor from './components/ScrollToAnchor'
 
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/work/remind" element={<Remind />} />
         <Route path="/work/first-revenue" element={<FirstRevenue />} />
         <Route path="/work/wishcake" element={<Wishcake />} />
+        <Route path="/work/qrew" element={<Qrew />} />
       </Routes>
 
       

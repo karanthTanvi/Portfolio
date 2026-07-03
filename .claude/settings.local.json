@@ -5,7 +5,8 @@
       "Bash(npx eslint *)",
       "Bash(echo \"EXIT: $?\")",
       "Bash(lsof -ti:5173)",
-      "Bash(node -e \"const tb=require\\('./node_modules/react-icons/tb/index.js'\\); console.log\\('TbX:', typeof tb.TbX, '| TbCheck:', typeof tb.TbCheck\\)\")"
+      "Bash(node -e \"const tb=require\\('./node_modules/react-icons/tb/index.js'\\); console.log\\('TbX:', typeof tb.TbX, '| TbCheck:', typeof tb.TbCheck\\)\")",
+      "Bash(echo \"LINT EXIT: $?\")"
     ]
   }
 }

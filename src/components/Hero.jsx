@@ -1,7 +1,41 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { TbMail, TbBrandLinkedin } from 'react-icons/tb'
 import VariableProximity from './VariableProximity'
+
+// Cycles a word letter by letter: type it in, hold, erase, type the next.
+function Typewriter({ words, typingSpeed = 90, deletingSpeed = 45, hold = 2000 }) {
+  const [index, setIndex] = useState(0)
+  const [text, setText] = useState('')
+  const [phase, setPhase] = useState('typing')
+
+  useEffect(() => {
+    const word = words[index]
+    let timer
+    if (phase === 'typing') {
+      if (text.length < word.length) {
+        timer = setTimeout(() => setText(word.slice(0, text.length + 1)), typingSpeed)
+      } else {
+        timer = setTimeout(() => setPhase('deleting'), hold)
+      }
+    } else if (text.length > 0) {
+      timer = setTimeout(() => setText(word.slice(0, text.length - 1)), deletingSpeed)
+    } else {
+      timer = setTimeout(() => {
+        setIndex((i) => (i + 1) % words.length)
+        setPhase('typing')
+      }, typingSpeed)
+    }
+    return () => clearTimeout(timer)
+  }, [text, phase, index, words, typingSpeed, deletingSpeed, hold])
+
+  return (
+    <span aria-live="polite">
+      {text}
+      <span className="tw-caret" aria-hidden="true" />
+    </span>
+  )
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },
@@ -58,6 +92,17 @@ export default function Hero() {
           align-items: flex-start;
           gap: 2rem;
         }
+        .tw-caret {
+          display: inline-block;
+          width: 0.02em;
+          height: 0.9em;
+          margin-left: 0.1em;
+          background: currentColor;
+          opacity: 0.4;
+          vertical-align: baseline;
+          animation: tw-blink 1s steps(1) infinite;
+        }
+        @keyframes tw-blink { 50% { opacity: 0; } }
         @media (max-width: 900px) {
           .hero-section { padding: 0 2rem 2.5rem; }
         }
@@ -114,13 +159,15 @@ export default function Hero() {
           style={{ ...headline, color: 'var(--text)', margin: 0 }}
         >
           <VariableProximity
-            label="Product Manager"
+            label="Product"
             fromFontVariationSettings="'wght' 600"
             toFontVariationSettings="'wght' 900"
             containerRef={containerRef}
             radius={150}
             falloff="linear"
           />
+          <span>&nbsp;</span>
+          <Typewriter words={['Manager', 'Designer']} />
         </motion.h2>
       </motion.div>
 

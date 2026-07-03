@@ -85,12 +85,19 @@ export default function CaseStudyShell({ sections, prev, next, children }) {
         }
         .toc-item.active .toc-number,
         .toc-item:hover .toc-number { opacity: 1; }
-        .case-study-content { min-width: 0; padding-bottom: 4rem; }
+        .case-study-content {
+          min-width: 0;
+          padding-bottom: 4rem;
+          display: flex;
+          flex-direction: column;
+          min-height: calc(100vh - 6rem);
+        }
+        .case-study-body { flex: 1 0 auto; min-width: 0; }
         .case-study-nav {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 4rem 0;
+          padding: 4rem 0 2em;
           margin-top: 4rem;
           border-top: 1px solid var(--border);
           gap: 2rem;
@@ -173,7 +180,7 @@ export default function CaseStudyShell({ sections, prev, next, children }) {
       </aside>
 
       <div className="case-study-content">
-        {children}
+        <div className="case-study-body">{children}</div>
         <div className="case-study-nav">
           {prev && (
             <Link to={prev.path} className="case-study-nav-link case-study-nav-prev cursor-hover">

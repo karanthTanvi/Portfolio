@@ -20,22 +20,25 @@ export default function Logo({ size = 36 }) {
       setOffset({ x: nx, y: ny })
     }
 
-    const enter = () => setHovering(true)
-    const leave = () => setHovering(false)
+    // Match the custom cursor exactly: open the mouth whenever the cursor grows,
+    // using document-level delegation so it also covers elements added later.
+    const HOVER_SELECTOR = 'a, button, .cursor-hover'
+    const onOver = (e) => {
+      if (e.target.closest(HOVER_SELECTOR)) setHovering(true)
+    }
+    const onOut = (e) => {
+      const el = e.target.closest(HOVER_SELECTOR)
+      if (el && !el.contains(e.relatedTarget)) setHovering(false)
+    }
 
     window.addEventListener('mousemove', handleMove)
-    const interactive = document.querySelectorAll('a, button, .cursor-hover')
-    interactive.forEach((el) => {
-      el.addEventListener('mouseenter', enter)
-      el.addEventListener('mouseleave', leave)
-    })
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
 
     return () => {
       window.removeEventListener('mousemove', handleMove)
-      interactive.forEach((el) => {
-        el.removeEventListener('mouseenter', enter)
-        el.removeEventListener('mouseleave', leave)
-      })
+      document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mouseout', onOut)
     }
   }, [])
 

@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import remindVideo from '../assets/remind/remind.webm'
 import wishcakeVideo from '../assets/wishcake/wishcake.mp4'
+import qrewVideo from '../assets/qrew/qrew.webm'
 import { useRef, useEffect } from 'react'
 
 const projects = [
@@ -17,6 +18,16 @@ const projects = [
   },
   {
     id: '02',
+    name: 'Qrew',
+    description: 'An award-winning app from the UTS Interaction Design Showcase.',
+    tags: ['Interaction Design', 'Product Design', 'Award-winning'],
+    year: '2024',
+    media: qrewVideo,
+    type: 'video',
+    path: '/work/qrew',
+  },
+  {
+    id: '03',
     name: 'First Revenue',
     description: "Turning a community app that wouldn't monetize into a profitable student-housing business.",
     tags: ['Product Management', 'Product Market Fit', '0-1'],
@@ -26,7 +37,7 @@ const projects = [
     path: '/work/first-revenue',
   },
   {
-    id: '03',
+    id: '04',
     name: 'Wishcake',
     description: 'A vibecoded web-app, taken from ideation all the way to hosting.',
     tags: ['Claude Code', 'Face Tracking', 'Vercel'],
@@ -229,32 +240,6 @@ export default function Work() {
           text-decoration: none;
           color: inherit;
         }
-        /* "more coming soon" placeholder, sits as the 4th cell in the 2x2 */
-        .work-soon {
-          border: 1px dashed var(--border);
-          border-radius: 24px;
-          min-height: 100%;
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.6rem;
-          text-align: center;
-        }
-        .work-soon-label {
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          opacity: 0.6;
-        }
-        .work-soon-text {
-          font-size: clamp(1.125rem, 1.8vw, 1.5rem);
-          font-weight: 500;
-          letter-spacing: -0.014em;
-          color: var(--text-muted);
-        }
         .tile-visual {
           background: var(--surface-secondary);
           border-radius: 24px;
@@ -368,17 +353,6 @@ export default function Work() {
       {projects.map((project, index) => (
         <ProjectCard key={project.id} project={project} index={index} />
       ))}
-
-      <motion.div
-        className="work-soon"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <span className="work-soon-label">In the works</span>
-        <span className="work-soon-text">More case studies coming soon</span>
-      </motion.div>
     </section>
   )
 }

@@ -173,7 +173,7 @@ const sections = [
   { id: 'takeaways', label: 'Takeaways' },
 ]
 
-const navPrev = { sublabel: 'Previous case study', label: 'reMind', path: '/work/remind' }
+const navPrev = { sublabel: 'Previous case study', label: 'qrew', path: '/work/qrew' }
 const navNext = { sublabel: 'Next case study', label: 'Wishcake', path: '/work/wishcake' }
 
 const fadeUp = (delay = 0) => ({
@@ -720,20 +720,19 @@ export default function FirstRevenue() {
           white-space: nowrap;
         }
         .bet-decision svg { flex-shrink: 0; }
-        /* killed badge: quiet, muted, and borderless */
+        /* killed badge: red label and cross mark */
         .bet-decision.killed {
           font-size: 10px;
           font-weight: 500;
           letter-spacing: 0.1em;
-          color: var(--text-muted);
-          opacity: 0.7;
+          color: #e5484d;
         }
-        /* kept badge: same quiet treatment as killed, but full-strength (white) */
+        /* kept badge: green label and tick mark */
         .bet-decision.kept {
           font-size: 10px;
           font-weight: 500;
           letter-spacing: 0.1em;
-          color: var(--text);
+          color: #30a46c;
         }
         .bet-learned-block {
           width: 100%;
