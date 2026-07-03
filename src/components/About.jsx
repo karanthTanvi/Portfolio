@@ -113,7 +113,7 @@ export default function About() {
         <p className="about-bio">
             Over three years across startups and enterprises, I've helped one startup find its path to monetization through user research and product thinking, and helped another land an enterprise pilot within two months of launch.        </p>
         <p className="about-bio">
-            I enjoy taking a product all the way from an idea on a napkin to something real that drives impact for businesses and the people who use it. When I'm not building products, I'm probably cooking, or deep in whatever creative hobby I've picked up that fortnight: pottery, painting, and now vibe coding past my bed time.    </p>
+            I enjoy taking a product all the way from an idea on a napkin to something real that drives impact for businesses and the people who use it. When I'm not building products, I'm probably cooking, or deep in whatever creative hobby I've picked up that week: pottery, painting, and now vibe coding past my bed time.    </p>
         {/* <div className="about-tags">
           {focus.map((f) => (
             <span key={f} className="about-tag">{f}</span>
