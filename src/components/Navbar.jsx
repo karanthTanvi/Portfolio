@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 const NAV_ITEMS = ['WORK', 'ABOUT', 'RESUME']
 const RESUME_URL = 'https://drive.google.com/file/d/1cY4sluH99Kqu7IQOaYunURO8U4HfogYW/view?usp=sharing'
 
+// Router-aware Link that can be animated, so mobile menu items navigate home + scroll from any page.
+const MotionLink = motion.create(Link)
+
 export default function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -115,9 +118,9 @@ export default function Navbar({ theme, toggleTheme }) {
           gap: 0.5rem;
         }
         .mobile-link {
-          font-size: 2rem;
-          font-weight: 600;
-          letter-spacing: -0.022em;
+          font-size: 1.0625rem;
+          font-weight: 400;
+          letter-spacing: -0.014em;
           line-height: 1.2;
           color: var(--text);
           text-decoration: none;
@@ -227,24 +230,38 @@ export default function Navbar({ theme, toggleTheme }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            {NAV_ITEMS.map((item, i) => (
-              <motion.a
-                key={item}
-                href={item === 'RESUME' ? RESUME_URL : `#${item.toLowerCase()}`}
-                target={item === 'RESUME' ? '_blank' : undefined}
-                rel={item === 'RESUME' ? 'noopener noreferrer' : undefined}
-                className="mobile-link"
-                onClick={(e) => {
-                  if (item === 'RESUME') { setMenuOpen(false); return }
-                  goToSection(e, item.toLowerCase())
-                }}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {item}
-              </motion.a>
-            ))}
+            {NAV_ITEMS.map((item, i) => {
+              const anim = {
+                className: 'mobile-link',
+                initial: { opacity: 0, y: 16 },
+                animate: { opacity: 1, y: 0 },
+                transition: { delay: 0.08 + i * 0.06, ease: [0.16, 1, 0.3, 1] },
+              }
+              if (item === 'RESUME') {
+                return (
+                  <motion.a
+                    key={item}
+                    href={RESUME_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMenuOpen(false)}
+                    {...anim}
+                  >
+                    {item}
+                  </motion.a>
+                )
+              }
+              return (
+                <MotionLink
+                  key={item}
+                  to={`/#${item.toLowerCase()}`}
+                  onClick={(e) => goToSection(e, item.toLowerCase())}
+                  {...anim}
+                >
+                  {item}
+                </MotionLink>
+              )
+            })}
             <motion.button
               className="mobile-theme"
               onClick={toggleTheme}

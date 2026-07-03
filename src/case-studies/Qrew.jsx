@@ -301,12 +301,21 @@ export default function Qrew() {
           align-items: center;
           gap: 1rem 1.5rem;
         }
-        .wip-note .prototype-cta { margin-left: auto; }
         .wip-note-text { font-size: 14px; color: #e5484d; letter-spacing: -0.005em; }
 
         @media (max-width: 900px) {
           .overview-meta { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
           .stat-strip { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 720px) {
+          /* stack the head so the Figma CTA sits left under the title, with page-rhythm spacing (4rem = inter-section gap) */
+          .cs-section.first { padding-top: 4rem; }
+          .overview-head {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+          }
         }
         @media (max-width: 480px) {
           .overview-meta { grid-template-columns: 1fr; }

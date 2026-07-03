@@ -24,8 +24,12 @@ export default function Wishcake() {
           transition: background 0.2s ease, transform 0.2s ease;
         }
         .wishcake-cta:hover { background: var(--surface-secondary); transform: translateY(-1px); }
+        @media (max-width: 720px) {
+          /* match Qrew/reMind: page-rhythm top padding on the first section (4rem = inter-section gap) */
+          .wishcake-overview { padding-top: 4rem; }
+        }
       `}</style>
-      <section id="overview" style={{ paddingBottom: '4rem' }}>
+      <section id="overview" className="wishcake-overview" style={{ paddingBottom: '4rem' }}>
         <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.02, margin: '0 0 1rem' }}>
           Wishcake
         </h1>

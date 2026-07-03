@@ -6,6 +6,9 @@ export default function Logo({ size = 36 }) {
   const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
+    // On touch devices there's no cursor to react to, so keep the face smiling.
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
+
     const handleMove = (e) => {
       if (!containerRef.current) return
       const rect = containerRef.current.getBoundingClientRect()

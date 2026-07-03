@@ -173,7 +173,7 @@ const sections = [
   { id: 'takeaways', label: 'Takeaways' },
 ]
 
-const navPrev = { sublabel: 'Previous case study', label: 'qrew', path: '/work/qrew' }
+const navPrev = { sublabel: 'Previous case study', label: 'Qrew', path: '/work/qrew' }
 const navNext = { sublabel: 'Next case study', label: 'Wishcake', path: '/work/wishcake' }
 
 const fadeUp = (delay = 0) => ({
@@ -762,6 +762,8 @@ export default function FirstRevenue() {
         }
 
         @media (max-width: 720px) {
+          /* match Qrew/reMind: page-rhythm top padding on the first section (4rem = inter-section gap) */
+          .cs-section.first { padding-top: 4rem; }
           .bets-track { grid-template-columns: 1fr; gap: 0; }
           .bets-track::before { display: none; }
           .bet-stage { flex-direction: row; gap: 1.25rem; padding-bottom: 1.25rem; }

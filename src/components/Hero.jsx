@@ -81,10 +81,11 @@ export default function Hero() {
       <style>{`
         .hero-section {
           min-height: 100vh;
-          padding: 0 4rem 3rem;
+          padding: 7rem 4rem 4rem;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: center;
+          gap: clamp(2.5rem, 6vh, 4.5rem);
         }
         .hero-bottom {
           display: flex;
@@ -104,10 +105,10 @@ export default function Hero() {
         }
         @keyframes tw-blink { 50% { opacity: 0; } }
         @media (max-width: 900px) {
-          .hero-section { padding: 0 2rem 2.5rem; }
+          .hero-section { padding: 6rem 2rem 3rem; }
         }
         @media (max-width: 720px) {
-          .hero-section { padding: 6rem 1.5rem 2rem; }
+          .hero-section { padding: 6rem 1.5rem 3rem; }
           .hero-bottom {
             flex-direction: column;
             gap: 2rem;
@@ -118,11 +119,10 @@ export default function Hero() {
       <motion.div
         ref={containerRef}
         style={{
-          flex: 1,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          justifyContent: 'center',
+          gap: '0.25rem',
           textAlign: 'left',
           opacity,
           scale,
@@ -136,7 +136,7 @@ export default function Hero() {
           className="cursor-hover"
           style={{
             ...headline,
-            fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
+            fontSize: 'clamp(2rem, 6.5vw, 5.5rem)',
             color: 'var(--text)',
             margin: 0,
           }}
@@ -156,7 +156,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="cursor-hover"
-          style={{ ...headline, color: 'var(--text)', margin: 0 }}
+          style={{ ...headline, fontSize: 'clamp(2rem, 6.5vw, 5.5rem)', color: 'var(--text)', margin: 0, whiteSpace: 'nowrap' }}
         >
           <VariableProximity
             label="Product"

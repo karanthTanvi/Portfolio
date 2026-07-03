@@ -51,7 +51,7 @@ const sections = [
 ]
 
 const navPrev = { sublabel: 'Back to', label: 'Home', path: '/#work' }
-const navNext = { sublabel: 'Next case study', label: 'qrew', path: '/work/qrew' }
+const navNext = { sublabel: 'Next case study', label: 'Qrew', path: '/work/qrew' }
 
 const metadata = [
   { label: 'Project', value: 'Apple Foundation Program' },
@@ -644,6 +644,16 @@ export default function Remind() {
           .overview-meta { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
           .overview-meta-value { white-space: normal; }
           .phases-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 720px) {
+          /* match Qrew: stack the head, CTA left under the title, page-rhythm spacing (4rem = inter-section gap) */
+          .cs-section.first { padding-top: 4rem; }
+          .overview-head {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+          }
         }
         @media (max-width: 480px) { .overview-meta { grid-template-columns: 1fr; } }
       `}</style>
