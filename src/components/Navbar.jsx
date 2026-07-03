@@ -5,7 +5,7 @@ import Logo from './Logo'
 import { Link } from 'react-router-dom'
 
 const NAV_ITEMS = ['WORK', 'ABOUT', 'RESUME']
-const RESUME_URL = 'https://drive.google.com/file/d/1l6OC_-RLi5-5fFJYAA_rEMgJh5SyHUsF/view?usp=sharing'
+const RESUME_URL = 'https://drive.google.com/file/d/1cY4sluH99Kqu7IQOaYunURO8U4HfogYW/view?usp=sharing'
 
 export default function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false)
