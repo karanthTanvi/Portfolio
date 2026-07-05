@@ -81,11 +81,21 @@ export default function Hero() {
       <style>{`
         .hero-section {
           min-height: 100vh;
-          padding: 7rem 4rem 4rem;
+          /* top padding ~= navbar height so the gap above the title matches the gap below it (to the bottom row) */
+          padding: 5.25rem 4rem 4rem;
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
+        }
+        /* title fills the space above the bottom row so it sits vertically centered, bottom row stays pinned */
+        .hero-headline {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           justify-content: center;
-          gap: clamp(2.5rem, 6vh, 4.5rem);
+          gap: 0.25rem;
+          text-align: left;
         }
         .hero-bottom {
           display: flex;
@@ -105,10 +115,15 @@ export default function Hero() {
         }
         @keyframes tw-blink { 50% { opacity: 0; } }
         @media (max-width: 900px) {
-          .hero-section { padding: 6rem 2rem 3rem; }
+          .hero-section { padding: 4.75rem 2rem 3rem; }
         }
         @media (max-width: 720px) {
-          .hero-section { padding: 6rem 1.5rem 3rem; }
+          .hero-section {
+            padding: 6rem 1.5rem 3rem;
+            justify-content: center;
+            gap: clamp(2.5rem, 6vh, 4.5rem);
+          }
+          .hero-headline { flex: 0 0 auto; justify-content: flex-start; }
           .hero-bottom {
             flex-direction: column;
             gap: 2rem;
@@ -118,16 +133,8 @@ export default function Hero() {
 
       <motion.div
         ref={containerRef}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          gap: '0.25rem',
-          textAlign: 'left',
-          opacity,
-          scale,
-          y,
-        }}
+        className="hero-headline"
+        style={{ opacity, scale, y }}
       >
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
