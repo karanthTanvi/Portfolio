@@ -95,6 +95,9 @@ export default function Qrew() {
     let startX = 0
     let startScroll = 0
     const onDown = (e) => {
+      // Touch uses the browser's native (smooth, inertial) horizontal scroll;
+      // only mouse gets the click-drag handler.
+      if (e.pointerType && e.pointerType !== 'mouse') return
       down = true
       pausedRef.current = true
       startX = e.pageX
@@ -281,7 +284,9 @@ export default function Qrew() {
           scrollbar-width: none;
           -ms-overflow-style: none;
           cursor: grab;
-          touch-action: pan-y;
+          touch-action: pan-x pan-y;    /* allow native horizontal swipe + vertical page scroll */
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
           -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
         }

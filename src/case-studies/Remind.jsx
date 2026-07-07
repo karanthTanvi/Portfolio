@@ -7,23 +7,23 @@ import lotusBlossomImg from '../assets/remind/LotusBlossom.jpg'
 import decisionMatrixImg from '../assets/remind/DecisionMatrix.jpg'
 import userFlowSvg from '../assets/remind/UserFlow.svg?raw'
 import lofiFlowSvg from '../assets/remind/LofiBeforeAfter.svg?raw'
-import sessionRealisticImg from '../assets/remind/Realistic.png'
-import sessionGhibliImg from '../assets/remind/Ghibli.png'
-import s1 from '../assets/remind/01-widget.png'
-import s2 from '../assets/remind/02-welcome.png'
-import s3 from '../assets/remind/03-sign-in.png'
-import s4 from '../assets/remind/04-create-account.png'
-import s5 from '../assets/remind/05-onboarding-avatars.png'
-import s6 from '../assets/remind/06-onboarding-widget.png'
-import s7 from '../assets/remind/07-onboarding-grounding.png'
-import s8 from '../assets/remind/08-home.png'
-import s9 from '../assets/remind/09-edit-avatar.png'
-import s10 from '../assets/remind/10-create-avatar.png'
-import s11 from '../assets/remind/11-invite.png'
-import s12 from '../assets/remind/12-scan-intro.png'
-import s13 from '../assets/remind/13-scan-face.png'
-import s14 from '../assets/remind/14-record-voice.png'
-import s15 from '../assets/remind/15-avatar-ready.png'
+import sessionRealisticImg from '../assets/remind/Realistic.webp'
+import sessionGhibliImg from '../assets/remind/Ghibli.webp'
+import s1 from '../assets/remind/01-widget.webp'
+import s2 from '../assets/remind/02-welcome.webp'
+import s3 from '../assets/remind/03-sign-in.webp'
+import s4 from '../assets/remind/04-create-account.webp'
+import s5 from '../assets/remind/05-onboarding-avatars.webp'
+import s6 from '../assets/remind/06-onboarding-widget.webp'
+import s7 from '../assets/remind/07-onboarding-grounding.webp'
+import s8 from '../assets/remind/08-home.webp'
+import s9 from '../assets/remind/09-edit-avatar.webp'
+import s10 from '../assets/remind/10-create-avatar.webp'
+import s11 from '../assets/remind/11-invite.webp'
+import s12 from '../assets/remind/12-scan-intro.webp'
+import s13 from '../assets/remind/13-scan-face.webp'
+import s14 from '../assets/remind/14-record-voice.webp'
+import s15 from '../assets/remind/15-avatar-ready.webp'
 import v16 from '../assets/remind/16-session-realistic.webm'
 import v17 from '../assets/remind/17-session-ghibli.webm'
 import v18 from '../assets/remind/18-breathing.webm'
@@ -133,6 +133,9 @@ export default function Remind() {
     let startX = 0
     let startScroll = 0
     const onDown = (e) => {
+      // Touch uses the browser's native (smooth, inertial) horizontal scroll;
+      // only mouse gets the click-drag handler.
+      if (e.pointerType && e.pointerType !== 'mouse') return
       down = true
       pausedRef.current = true
       startX = e.pageX
@@ -587,7 +590,9 @@ export default function Remind() {
           scrollbar-width: none;        /* Firefox */
           -ms-overflow-style: none;     /* old Edge */
           cursor: grab;
-          touch-action: pan-y;
+          touch-action: pan-x pan-y;    /* allow native horizontal swipe + vertical page scroll */
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
           -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
         }
