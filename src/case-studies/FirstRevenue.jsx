@@ -25,7 +25,7 @@ const atAGlance = {
     'Ran the user research, designed the UX flows and screens, and owned product strategy and feature definition. Managed interns and partnered with the founder on company direction.',
   company: `${COMPANY}, early-stage proptech for international students`,
   duration: DURATION,
-  outcome: `0 to 1, to around $800 a week in profit across ${PROPERTY_COUNT} properties`,
+  outcome: `~$800 a week in profit across ${PROPERTY_COUNT} properties, in the first week`,
 }
 
 const moveThatWorked =
@@ -116,16 +116,14 @@ const result = {
   label: 'The result',
   headline: 'A profitable housing business.',
   body: [
-    `I identified the model and designed the validation; the founder executed the legals and ran the community operations. That split earned Rekro's first revenue, commission from both landlords and renters, reaching around $800 a week in profit across ${PROPERTY_COUNT} properties. The founder was impressed enough to offer me a cofounder role off the back of the strategy work.`,
+    `I identified the model and designed the validation; the founder executed the legals and ran the community operations. That split earned Rekro's first revenue, commission from both landlords and renters, reaching around $800 a week in profit across ${PROPERTY_COUNT} properties in the first week. The founder was impressed enough to offer me a cofounder role off the back of the strategy work.`,
     'And nothing about the fix is student-specific. No rental history and no easy way to find flatmates are blockers for anyone new to a city, so it works for any renter, not just students.',
   ],
 }
 
 // [[ INFOGRAPHIC 4, "Outcomes" ]] rendered by <Outcomes /> below.
 const outcomes = [
-  { value: '~$800 / week', label: `profit across ${PROPERTY_COUNT} properties` },
-  { value: 'Both sides', label: 'commission from landlord and renter' },
-  { value: '0 to 1', label: 'first revenue from a standing start' },
+  { value: '~$800 / week', label: `in profit across ${PROPERTY_COUNT} properties, from the first week` },
   { value: 'Cofounder offer', label: 'earned off the strategy work' },
 ]
 
