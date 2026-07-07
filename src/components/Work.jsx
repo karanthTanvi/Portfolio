@@ -19,7 +19,7 @@ const projects = [
   {
     id: '02',
     name: 'First Revenue',
-    description: "Turning a community app that wouldn't monetize into a profitable student-housing business.",
+    description: "Turning a community app that wouldn't monetize into a profitable housing business.",
     tags: ['Product Management', 'Product Market Fit', '0-1'],
     year: '2025',
     image: null,

@@ -16,13 +16,13 @@ const PROPERTY_COUNT = '4'
 
 const hero = {
   title: 'First Revenue',
-  subhead: "Turning a community app that wouldn't monetize into a profitable student-housing business.",
+  subhead: "Turning a community app that wouldn't monetize into a profitable housing business.",
 }
 
 const atAGlance = {
   role: ROLE,
   responsibilities:
-    'Owned product strategy, feature definition, and UX flows. Managed interns and partnered with the founder on company direction.',
+    'Ran the user research, designed the UX flows and screens, and owned product strategy and feature definition. Managed interns and partnered with the founder on company direction.',
   company: `${COMPANY}, early-stage proptech for international students`,
   duration: DURATION,
   outcome: `0 to 1, to around $800 a week in profit across ${PROPERTY_COUNT} properties`,
@@ -60,7 +60,7 @@ const networking = {
   label: 'Where we started',
   headline: 'We started with a networking app no one would pay for.',
   body: [
-    'We set out to help international students settle into a new country, beginning with a community app. I led the user flows and information hierarchy.',
+    'We set out to help international students settle into a new country, beginning with a community app. I designed it end to end: the user flows, the information hierarchy, and the screens.',
     'The catch: networking is something Instagram and Facebook already do for free, so willingness to pay was near zero. We killed it.',
   ],
 }
@@ -69,14 +69,14 @@ const housing = {
   label: 'Following the pain',
   headline: "The real pain was housing, and matching flatmates didn't fix it.",
   body: [
-    'In interviews, the expensive, acute pain was clear: money burned on temporary stays, endless inspections, no local rental history, and the scramble to find flatmates.',
+    'I ran the user interviews, and the expensive, acute pain came through clearly: money burned on temporary stays, endless inspections, no local rental history, and the scramble to find flatmates.',
     "So we tried the obvious fix and grouped people to rent together. They liked it. They still wouldn't pay. Two products, one wall.",
   ],
 }
 
 const reframe = {
   label: 'The insight',
-  headline: 'So we removed the problem instead of solving it.',
+  headline: 'Instead of helping them solve the problem, we solved it for them.',
   body: [
     'The two real blockers were finding flatmates and having no rental history. Instead of building tools to fight through them, we made them disappear: the company background-checks a renter, leases the property itself, and subleases it to them, carrying the rental history and filling the flatmates from its own pool.',
     'Riskier on paper, but a deep enough renter pool keeps that risk in check, and for the student it solves almost everything at once.',
@@ -99,7 +99,7 @@ const solveRemove = {
   },
   right: {
     eyebrow: 'The reframe',
-    title: 'Remove it for them',
+    title: 'Solve it for them',
     sub: 'One move by the company, and the hardest parts are gone.',
     step: 'Background-check, master-lease, sublease.',
     removedLabel: 'Gone for the student',
