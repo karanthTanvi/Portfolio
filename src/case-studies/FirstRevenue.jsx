@@ -43,7 +43,7 @@ const threeBets = [
   {
     num: '02',
     bet: 'Flatmate-finder',
-    learned: "Liked it, still won't pay.",
+    learned: 'Became networking again. Still no pay.',
     decision: 'Killed',
     state: 'killed',
   },
@@ -67,10 +67,10 @@ const networking = {
 
 const housing = {
   label: 'Following the pain',
-  headline: "The real pain was housing, and matching flatmates didn't fix it.",
+  headline: 'The founder called the pivot: housing.',
   body: [
-    'I ran the user interviews, and the expensive, acute pain came through clearly: money burned on temporary stays, endless inspections, no local rental history, and the scramble to find flatmates.',
-    "So we tried the obvious fix and grouped people to rent together. They liked it. They still wouldn't pay. Two products, one wall.",
+    'Housing is the hardest part of moving countries, so the founder narrowed the company to it. The first idea was the simplest one: help students find flatmates.',
+    'I redesigned the app around compatibility matching. People liked it, but it behaved like one more networking platform, and again there was no real way to make money. Two products, one wall.',
   ],
 }
 
@@ -78,35 +78,12 @@ const reframe = {
   label: 'The insight',
   headline: 'Instead of helping them solve the problem, we solved it for them.',
   body: [
-    'The two real blockers were finding flatmates and having no rental history. Instead of building tools to fight through them, we made them disappear: the company background-checks a renter, leases the property itself, and subleases it to them, carrying the rental history and filling the flatmates from its own pool.',
-    'Riskier on paper, but a deep enough renter pool keeps that risk in check, and for the student it solves almost everything at once.',
+    "After two kills, I saw what we'd been doing wrong: building the solution first, then hunting for users to fit it. So I flipped the process. I started from scratch, interviewed 10+ international students and early immigrants, and mapped the whole renting journey to find a pain they'd actually pay to remove.",
+    "The research showed why students were stuck. The normal rental market wants income proof and a rental history, and most of them have neither. The fallback, student housing, will take them, but it's expensive, the rooms are tiny and shared, and it sits right by campus, which pushes the price higher still. Students take it for one semester and get out. Underneath it all sat two blockers: no rental history, and no flatmates.",
+    "My recommendation: stop building tools to help students fight through those blockers, and remove them instead. If Rekro takes the lease itself and subleases to the student, filling the flatmates from its own pool, the student gets what they actually wanted: the normal rental market, with bigger, better-located homes at better value than student housing. I took it to the founder.",
   ],
 }
 
-// [[ INFOGRAPHIC 2, "Solve vs Remove" ]] - rendered by <SolveRemove /> below.
-const solveRemove = {
-  left: {
-    eyebrow: 'The old way',
-    title: 'Help them solve it',
-    sub: 'A tangled, multi-step path, and the student carries every step.',
-    steps: [
-      'Hunt for flatmates',
-      'Book inspection after inspection',
-      'Get knocked back, no rental history',
-      'Slowly earn a rental history',
-    ],
-    burden: 'On the student',
-  },
-  right: {
-    eyebrow: 'The reframe',
-    title: 'Solve it for them',
-    sub: 'One move by the company, and the hardest parts are gone.',
-    step: 'Background-check, master-lease, sublease.',
-    removedLabel: 'Gone for the student',
-    removed: ['Finding flatmates', 'Rental history'],
-    burden: 'On the company',
-  },
-}
 
 // [[ INFOGRAPHIC 3, "How the model works" ]] rendered by <ModelFlow /> below.
 const model = {
@@ -128,10 +105,10 @@ const model = {
 
 const demand = {
   label: 'Proving demand',
-  headline: 'Then we proved demand and went where the users already were.',
+  headline: 'Then I proved demand by going where the users already were.',
   body: [
-    'Burned twice on willingness to pay, I pushed to validate that people would actually pay before we built anything else.',
-    'To fill the renter pool, instead of launching an Instagram page and waiting, we went where students already gather: WhatsApp and Facebook groups.',
+    'Burned twice on willingness to pay, I refused to build before validating. The plan I pitched: test the model in market with real listings before writing a line of code.',
+    'To fill the renter pool, instead of launching an Instagram page and waiting, I went where the users already were: WhatsApp and Facebook groups.',
   ],
 }
 
@@ -139,9 +116,8 @@ const result = {
   label: 'The result',
   headline: 'A profitable housing business.',
   body: [
-    "The founder ran the community, handled the legalities, and earned the company's first revenue on commission from both landlords and renters.",
-    `From a standing start, that reached around $800 a week in profit across ${PROPERTY_COUNT} properties in the first stage, and the strategy work led to a cofounder offer.`,
-    'And nothing about the model is student-specific. No rental history and no easy way to find flatmates are blockers for anyone new to a city, so the same model works for any renter, not just students. That is where the scale is: deepen the renter pool, systematize the background checks, and the model compounds.',
+    `I identified the model and designed the validation; the founder executed the legals and ran the community operations. That split earned Rekro's first revenue, commission from both landlords and renters, reaching around $800 a week in profit across ${PROPERTY_COUNT} properties. The founder was impressed enough to offer me a cofounder role off the back of the strategy work.`,
+    'And nothing about the fix is student-specific. No rental history and no easy way to find flatmates are blockers for anyone new to a city, so it works for any renter, not just students.',
   ],
 }
 
@@ -154,7 +130,7 @@ const outcomes = [
 ]
 
 const takeaways = [
-  'Confirm people will actually pay during discovery, before committing to a build.',
+  "Two pivots taught me I'd had the process backwards: building a solution, then searching for users to fit it. Starting from a validated pain, found through 10+ interviews, is what finally produced revenue.",
   'Positive feedback is a weak signal on its own; people liked the early versions in interviews and still would not pay.',
   'A lot of the progress came from redefining the problem we were solving, which made the hardest parts fall away.',
   'The solution that worked was an operational model that never had to become an app.',
@@ -226,123 +202,24 @@ function ThreeBets() {
       role="group"
       aria-label="The three bets: how the product evolved from a killed networking app, through a killed flatmate-finder, to a kept master-lease model that earned first revenue."
     >
-      <ol className="bets-track">
+      <ol className="bets-list">
         {threeBets.map((b, i) => {
           const kept = b.state === 'kept'
           return (
-            <motion.li key={b.num} className={`bet-stage ${b.state}`} {...stageMotion(i)}>
-              <div className="bet-rail">
-                <span className={`bet-dot ${b.state}`} aria-hidden="true">{b.num}</span>
+            <motion.li key={b.num} className={`bet-row ${b.state}`} {...stageMotion(i)}>
+              <span className="bet-num" aria-hidden="true">{b.num}</span>
+              <div className="bet-main">
+                <h3 className="bet-name">{b.bet}</h3>
+                <p className="bet-learned">{b.learned}</p>
               </div>
-              <div className={`bet-card ${b.state}`}>
-                <div className="bet-card-head">
-                  <h3 className="bet-name">{b.bet}</h3>
-                  <span className={`bet-decision ${b.state}`}>
-                    {kept ? <TbCheck size={13} aria-hidden="true" /> : <TbX size={12} aria-hidden="true" />}
-                    {b.decision}
-                  </span>
-                </div>
-                <div className="bet-learned-block">
-                  {kept ? (
-                    <span className="bet-learned-label">Outcome</span>
-                  ) : (
-                    <span className="bet-learned-label">Why we pivoted</span>
-                  )}
-                  <p className="bet-learned">{b.learned}</p>
-                </div>
-              </div>
+              <span className={`bet-decision ${b.state}`}>
+                {kept ? <TbCheck size={13} aria-hidden="true" /> : <TbX size={12} aria-hidden="true" />}
+                {b.decision}
+              </span>
             </motion.li>
           )
         })}
       </ol>
-      <figcaption className="bets-caption">
-        Each bet was tested against one question: will people pay? Two were killed; the third was kept and earned first revenue.
-      </figcaption>
-    </figure>
-  )
-}
-
-/* ------------------------------------------------------------------ *
- * INFOGRAPHIC 2 - Solve vs Remove (the reframe; the page's bold beat)
- * Busy/effortful left vs calm/singular right, arrow driving left→right.
- * Removed blockers read via strikethrough + ✕ icon + a label, not color.
- * ------------------------------------------------------------------ */
-function SolveRemove() {
-  const reduce = useReducedMotion()
-  const colMotion = (x) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, x },
-          whileInView: { opacity: 1, x: 0 },
-          viewport: { once: true, amount: 0.3 },
-          transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-        }
-  const { left, right } = solveRemove
-
-  return (
-    <figure
-      className="solve-figure"
-      role="group"
-      aria-label="The reframe. The old way: help students solve renting's hardest parts through a tangled multi-step path they carry themselves. The new way: the company background-checks, master-leases, and subleases in one step, so finding flatmates and rental history are gone for the student and the burden shifts to the company."
-    >
-      <div className="solve-grid">
-        <motion.section className="solve-col solve-left" {...colMotion(-16)}>
-          <header className="solve-head">
-            <span className="solve-eyebrow">{left.eyebrow}</span>
-            <h3 className="solve-title">{left.title}</h3>
-            <p className="solve-sub">{left.sub}</p>
-          </header>
-          <ul className="solve-steps">
-            {left.steps.map((s) => (
-              <li key={s} className="solve-step">
-                <span className="solve-step-dot" aria-hidden="true" />
-                {s}
-              </li>
-            ))}
-          </ul>
-          <footer className="solve-burden">
-            <span className="solve-burden-key">Burden</span>
-            <span className="solve-burden-val">{left.burden}</span>
-          </footer>
-        </motion.section>
-
-        <div className="solve-arrow" aria-hidden="true">
-          <TbArrowRight size={20} />
-        </div>
-
-        <motion.section className="solve-col solve-right" {...colMotion(16)}>
-          <header className="solve-head">
-            <span className="solve-eyebrow">{right.eyebrow}</span>
-            <h3 className="solve-title">{right.title}</h3>
-            <p className="solve-sub">{right.sub}</p>
-          </header>
-          <div className="solve-onestep">
-            <span className="solve-step-dot filled" aria-hidden="true">
-              <TbCheck size={17} />
-            </span>
-            {right.step}
-          </div>
-          <div className="solve-removed">
-            <span className="solve-removed-label">{right.removedLabel}</span>
-            <ul className="solve-chips">
-              {right.removed.map((c) => (
-                <li key={c} className="solve-chip">
-                  <TbX size={13} aria-hidden="true" />
-                  <s>{c}</s>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <footer className="solve-burden">
-            <span className="solve-burden-key">Burden</span>
-            <span className="solve-burden-val">{right.burden}</span>
-          </footer>
-        </motion.section>
-      </div>
-      <figcaption className="solve-caption">
-        Same problem, opposite strategy: stop helping the student through the blockers, and take the blockers away.
-      </figcaption>
     </figure>
   )
 }
@@ -392,7 +269,6 @@ function ModelFlow() {
         <div className="model-node hub">
           <span className="model-node-role">{hub.role}</span>
           <span className="model-node-name">{hub.name}</span>
-          <p className="model-node-notes">{hub.notes}</p>
         </div>
 
         <div className="model-link right">
@@ -409,12 +285,8 @@ function ModelFlow() {
         <div className="model-node">
           <span className="model-node-role">{student.role}</span>
           <span className="model-node-name">{student.name}</span>
-          <p className="model-node-notes">{student.notes}</p>
         </div>
       </div>
-      <figcaption className="model-caption">
-        {hub.name} sits in the middle, taking on the background checks and the risk, and earns commission from both the landlord and the renter.
-      </figcaption>
     </motion.figure>
   )
 }
@@ -474,13 +346,11 @@ export default function FirstRevenue() {
           margin: 0;
         }
 
-        /* AT A GLANCE CARD - the recruiter's 10-second read */
+        /* AT A GLANCE - the recruiter's 10-second read, de-boxed under a strong rule */
         .glance-card {
-          margin: 3rem 0 0;
-          background: var(--surface-secondary);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          padding: 2rem;
+          margin: 3.5rem 0 0;
+          padding: 1.75rem 0 0;
+          border-top: 2px solid var(--text);
           display: flex;
           flex-direction: column;
         }
@@ -598,20 +468,10 @@ export default function FirstRevenue() {
         /* TAKEAWAYS LIST */
         .takeaways-list { list-style: none; margin: 2.5rem 0 0; padding: 0; }
         .takeaway {
-          display: flex;
-          gap: 0.9rem;
           padding: 1.25rem 0;
           border-top: 1px solid var(--border);
         }
         .takeaway:last-child { border-bottom: 1px solid var(--border); }
-        .takeaway-dot {
-          flex-shrink: 0;
-          width: 0.4rem;
-          height: 0.4rem;
-          border-radius: 50%;
-          background: var(--text);
-          margin-top: 0.6rem;
-        }
         .takeaway-text {
           font-size: clamp(1rem, 1.3vw, 1.125rem);
           line-height: 1.6;
@@ -620,301 +480,62 @@ export default function FirstRevenue() {
           margin: 0;
         }
 
-        /* INFOGRAPHIC 1 - THREE BETS: one story, conviction building toward the survivor */
+        /* INFOGRAPHIC 1 - THREE BETS: editorial ledger. Type does the work;
+           the two dead ends are struck through, the survivor stands. */
         .bets-figure { margin: 4rem 0 0; }
-        .bets-track {
-          list-style: none;
-          margin: 0;
-          padding: 0;
+        .bets-list { list-style: none; margin: 0; padding: 0; }
+        .bet-row {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-          position: relative;
-          align-items: stretch;
+          grid-template-columns: 3.25rem 1fr auto;
+          align-items: baseline;
+          gap: 0.25rem 1.25rem;
+          padding: 1.5rem 0;
+          border-top: 1px solid var(--border);
         }
-        /* connecting line: uniform thickness, darkening gently toward stage 3 */
-        .bets-track::before {
-          content: '';
-          position: absolute;
-          top: 1.375rem;
-          left: 16.667%;
-          right: 16.667%;
-          height: 2px;
-          transform: translateY(-50%);
-          background: linear-gradient(to right, var(--text-tertiary) 0%, var(--text-muted) 55%, var(--text) 100%);
-          z-index: 0;
-        }
-        .bet-stage {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .bet-rail { display: flex; justify-content: center; }
-        .bet-dot {
-          width: 2.75rem;
-          height: 2.75rem;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        /* the surviving bet earns the strong rule */
+        .bet-row.kept { border-top: 2px solid var(--text); }
+        .bet-num {
           font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 0.02em;
-          font-variant-numeric: tabular-nums;
-          border: 1px solid var(--border);
-          background: var(--bg-face);
           color: var(--text-muted);
+          opacity: 0.55;
+          font-variant-numeric: tabular-nums;
         }
-        /* the one that landed: hollow → filled node */
-        .bet-dot.kept {
-          background: var(--text);
-          color: var(--bg-face);
-          border-color: var(--text);
-        }
-        .bet-card {
-          flex: 1;
-          min-height: 11rem;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.85rem;
-          padding: 1.5rem;
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          background: transparent;
-        }
-        /* recede the two dead ends */
-        .bet-card.killed { border-color: var(--hairline); }
-        .bet-card.killed .bet-name { opacity: 0.7; }
-        .bet-card.killed .bet-learned { opacity: 0.85; }
-        /* hero: emphasized with a filled surface + subtle lift (not the CTA inversion) */
-        .bet-card.kept {
-          background: var(--surface-secondary);
-          border-color: var(--border);
-          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-        }
-
-        /* title + badge share a row again; badge sits top-right of the card */
-        .bet-card-head {
-          width: 100%;
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 0.5rem 0.75rem;
-          flex-wrap: wrap;
-        }
+        .bet-main { min-width: 0; }
         .bet-name {
-          font-size: 1.0625rem;
+          font-size: clamp(1.375rem, 2.6vw, 2rem);
           font-weight: 600;
-          letter-spacing: -0.014em;
+          letter-spacing: -0.022em;
+          line-height: 1.15;
           color: var(--text);
-          margin: 0;
+          margin: 0 0 0.3rem;
         }
+        .bet-row.killed .bet-name {
+          color: var(--text-muted);
+          opacity: 0.55;
+          text-decoration: line-through;
+          text-decoration-thickness: 1.5px;
+        }
+        .bet-row.killed .bet-learned { opacity: 0.7; }
+        .bet-learned { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin: 0; }
         .bet-decision {
           display: inline-flex;
           align-items: center;
           gap: 0.3rem;
-          flex-shrink: 0;
           text-transform: uppercase;
           white-space: nowrap;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
         }
         .bet-decision svg { flex-shrink: 0; }
-        /* killed badge: red label and cross mark */
-        .bet-decision.killed {
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: var(--danger);
-        }
-        /* kept badge: green label and tick mark */
-        .bet-decision.kept {
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: var(--success);
-        }
-        .bet-learned-block {
-          width: 100%;
-          margin-top: auto;
-          display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
-        }
-        .bet-learned-label {
-          font-size: 10px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          opacity: 0.7;
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-        }
-        .bet-learned-label svg { flex-shrink: 0; }
-        .bet-learned { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin: 0; min-height: 3em; }
-        .bets-caption {
-          margin-top: 1.25rem;
-          font-size: 13px;
-          color: var(--text-muted);
-          line-height: 1.5;
-          letter-spacing: -0.005em;
-        }
+        .bet-decision.killed { color: var(--danger); }
+        .bet-decision.kept { color: var(--success); }
 
         @media (max-width: 720px) {
           /* match Qrew/reMind: page-rhythm top padding on the first section (4rem = inter-section gap) */
           .cs-section.first { padding-top: 4rem; }
-          .bets-track { grid-template-columns: 1fr; gap: 0; }
-          .bets-track::before { display: none; }
-          .bet-stage { flex-direction: row; gap: 1.25rem; padding-bottom: 1.25rem; }
-          .bet-stage:last-child { padding-bottom: 0; }
-          .bet-rail { flex: 0 0 2.75rem; position: relative; }
-          /* vertical connector through the dots when stacked */
-          .bet-stage:not(:last-child) .bet-rail::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 2.75rem;
-            bottom: -1.25rem;
-            width: 2px;
-            background: var(--border);
-          }
-        }
-
-        /* INFOGRAPHIC 2 - SOLVE vs REMOVE (the reframe; the bold beat) */
-        .solve-figure { margin: 3rem 0 0; }
-        .solve-grid {
-          display: grid;
-          grid-template-columns: 1fr auto 1fr;
-          gap: 1.25rem;
-          align-items: stretch;
-        }
-        .solve-col {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-          padding: 1.75rem;
-          border: 1px solid var(--border);
-          border-radius: 18px;
-        }
-        /* the calm, emphasized side */
-        .solve-right { background: var(--surface-secondary); }
-        .solve-head { display: flex; flex-direction: column; gap: 0.5rem; }
-        .solve-eyebrow {
-          font-size: 10px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          opacity: 0.7;
-        }
-        .solve-title {
-          font-size: clamp(1.375rem, 2.4vw, 1.875rem);
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          line-height: 1.1;
-          color: var(--text);
-          margin: 0;
-        }
-        .solve-sub { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin: 0; }
-
-        /* LEFT: a busy, multi-step path */
-        .solve-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
-        .solve-step {
-          display: flex;
-          align-items: center;
-          gap: 0.7rem;
-          padding: 0.3rem 0;
-          font-size: 13px;
-          line-height: 1.4;
-          color: var(--text);
-        }
-        .solve-step-dot {
-          flex-shrink: 0;
-          width: 0.5rem;
-          height: 0.5rem;
-          border-radius: 50%;
-          border: 1px solid var(--text-muted);
-        }
-        /* RIGHT: one clean step, emphasized */
-        .solve-onestep {
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          font-size: 15px;
-          font-weight: 500;
-          line-height: 1.4;
-          color: var(--text);
-        }
-        /* plain white tick, no fill, no circle */
-        .solve-step-dot.filled {
-          width: auto;
-          height: auto;
-          border: 0;
-          background: transparent;
-          color: var(--text);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .solve-removed { display: flex; flex-direction: column; gap: 0.6rem; }
-        .solve-removed-label {
-          font-size: 10px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          opacity: 0.7;
-        }
-        .solve-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .solve-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.4rem 0.75rem;
-          border: 1px dashed var(--border);
-          border-radius: 9999px;
-          font-size: 13px;
-          color: var(--text-muted);
-        }
-        .solve-chip svg { flex-shrink: 0; opacity: 0.85; }
-        .solve-chip s { text-decoration-thickness: 1.5px; }
-        /* burden line, pinned to the bottom of each column so they align */
-        .solve-burden {
-          margin-top: auto;
-          display: flex;
-          align-items: baseline;
-          gap: 0.5rem;
-          padding-top: 0.25rem;
-        }
-        .solve-burden-key {
-          font-size: 10px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          opacity: 0.6;
-        }
-        .solve-burden-val { font-size: 14px; font-weight: 500; color: var(--text); }
-        /* the arrow driving the reframe left → right */
-        .solve-arrow {
-          align-self: center;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 2rem;
-          color: var(--text);
-        }
-        .solve-caption {
-          margin-top: 1.25rem;
-          font-size: 13px;
-          color: var(--text-muted);
-          line-height: 1.5;
-          letter-spacing: -0.005em;
-        }
-        @media (max-width: 760px) {
-          .solve-grid { grid-template-columns: 1fr; gap: 0.85rem; }
-          .solve-arrow { transform: rotate(90deg); margin: 0.25rem auto; }
+          .bet-row { grid-template-columns: 2.25rem 1fr; }
+          .bet-decision { grid-column: 2; justify-self: start; margin-top: 0.5rem; }
         }
 
         /* INFOGRAPHIC 3 - HOW THE MODEL WORKS (company as hub) */
@@ -925,17 +546,21 @@ export default function FirstRevenue() {
           align-items: center;
           gap: 0.75rem;
         }
+        /* de-boxed: endpoints are plain type; only the hub is a subtle node */
         .model-node {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          gap: 0.35rem;
-          padding: 1.25rem;
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          gap: 0.3rem;
+          padding: 0;
         }
-        /* the hub absorbs the risk and the burden */
-        .model-node.hub { background: var(--surface-secondary); align-self: stretch; }
+        /* the hub is the one emphasized element: the company in the middle */
+        .model-node.hub {
+          background: var(--surface-secondary);
+          align-self: stretch;
+          padding: 1.1rem 1.25rem;
+          border-radius: 12px;
+        }
         .model-node-role {
           font-size: 10px;
           letter-spacing: 0.16em;
@@ -1011,17 +636,17 @@ export default function FirstRevenue() {
         .outcome-card {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          padding: 1.5rem 1.25rem;
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          gap: 0.4rem;
+          padding: 1.1rem 0 0;
+          border-top: 1px solid var(--text);
         }
         .outcome-value {
-          font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+          font-size: clamp(1.5rem, 2.6vw, 2.125rem);
           font-weight: 600;
-          letter-spacing: -0.018em;
-          line-height: 1.15;
+          letter-spacing: -0.025em;
+          line-height: 1.05;
           color: var(--text);
+          font-variant-numeric: tabular-nums;
         }
         .outcome-label { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
         @media (max-width: 560px) {
@@ -1086,7 +711,6 @@ export default function FirstRevenue() {
       {/* 04 - THE REFRAME (signature moment) */}
       <section id="reframe" className="cs-section reframe-section">
         <Prose {...reframe} />
-        <SolveRemove />
         <ModelFlow />
       </section>
 
@@ -1107,7 +731,6 @@ export default function FirstRevenue() {
         <ul className="takeaways-list">
           {takeaways.map((t, i) => (
             <motion.li key={t} className="takeaway" {...fadeUp(0.05 + i * 0.05)}>
-              <span className="takeaway-dot" aria-hidden="true" />
               <p className="takeaway-text">{t}</p>
             </motion.li>
           ))}
