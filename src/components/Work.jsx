@@ -183,7 +183,7 @@ function ProjectCard({ project, index }) {
               loop
               muted
               playsInline
-              preload="none"
+              preload="auto"
             />
           ) : project.media ? (
             <img src={project.media} alt={project.name} className="project-image" />

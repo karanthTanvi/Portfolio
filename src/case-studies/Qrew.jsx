@@ -401,7 +401,7 @@ export default function Qrew() {
                 {item.type === 'video' ? (
                   <LazyVideo src={item.src} ariaLabel={item.alt} />
                 ) : (
-                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                  <img src={item.src} alt={item.alt} decoding="async" />
                 )}
               </figure>
             ))}

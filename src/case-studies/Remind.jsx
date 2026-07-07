@@ -806,7 +806,7 @@ export default function Remind() {
         </motion.p>
 
         <motion.figure className="case-image" {...fadeUp(0.2)}>
-          <img src={lotusBlossomImg} alt="Lotus Blossom brainstorming wall with 70+ ideas mapped out" loading="lazy" decoding="async" />
+          <img src={lotusBlossomImg} alt="Lotus Blossom brainstorming wall with 70+ ideas mapped out" decoding="async" />
           <figcaption>Lotus Blossom: 8 sub-ideas around each main idea, then 8 around each of those.</figcaption>
         </motion.figure>
 
@@ -819,7 +819,7 @@ export default function Remind() {
         </motion.p>
 
         <motion.figure className="case-image" {...fadeUp(0.4)}>
-          <img src={decisionMatrixImg} alt="Decision matrix scoring ideas on impact, feasibility, and brief alignment" loading="lazy" decoding="async" />
+          <img src={decisionMatrixImg} alt="Decision matrix scoring ideas on impact, feasibility, and brief alignment" decoding="async" />
           <figcaption>Decision matrix: every idea scored against the brief.</figcaption>
         </motion.figure>
 
@@ -881,11 +881,11 @@ export default function Remind() {
         <motion.div className="design-comparison" {...fadeUp(0.5)}>
           <figure>
             <span className="compare-label">Hyperrealistic</span>
-            <img src={sessionRealisticImg} alt="Session screen with a photorealistic avatar" loading="lazy" decoding="async" />
+            <img src={sessionRealisticImg} alt="Session screen with a photorealistic avatar" decoding="async" />
           </figure>
           <figure>
             <span className="compare-label">Ghibli</span>
-            <img src={sessionGhibliImg} alt="Session screen with a Ghibli-style illustrated avatar" loading="lazy" decoding="async" />
+            <img src={sessionGhibliImg} alt="Session screen with a Ghibli-style illustrated avatar" decoding="async" />
           </figure>
         </motion.div>
         <motion.p className="cs-body" {...fadeUp(0.55)}>
@@ -908,7 +908,7 @@ export default function Remind() {
               {s.type === 'video' ? (
                 <LazyVideo src={s.src} ariaLabel={s.alt} />
               ) : (
-                <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+                <img src={s.src} alt={s.alt} decoding="async" />
               )}
             </motion.figure>
           ))}
@@ -942,7 +942,7 @@ export default function Remind() {
           <div className="outcome-track">
             {[...outcomePhotos, ...outcomePhotos].map((p, i) => (
               <figure key={i} aria-hidden={i >= outcomePhotos.length ? true : undefined}>
-                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+                <img src={p.src} alt={p.alt} decoding="async" />
               </figure>
             ))}
           </div>
