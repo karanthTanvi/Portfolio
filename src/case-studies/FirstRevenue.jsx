@@ -140,7 +140,8 @@ const result = {
   headline: 'A profitable housing business.',
   body: [
     "The founder ran the community, handled the legalities, and earned the company's first revenue on commission from both landlords and renters.",
-    `From a standing start, that reached around $800 a week in profit across ${PROPERTY_COUNT} properties in the first stage, and the strategy work led to a cofounder offer. Next step is scale, and it all hinges on the renter pool: deepen it, systematize the background checks, and the model compounds.`,
+    `From a standing start, that reached around $800 a week in profit across ${PROPERTY_COUNT} properties in the first stage, and the strategy work led to a cofounder offer.`,
+    'And nothing about the model is student-specific. No rental history and no easy way to find flatmates are blockers for anyone new to a city, so the same model works for any renter, not just students. That is where the scale is: deepen the renter pool, systematize the background checks, and the model compounds.',
   ],
 }
 
