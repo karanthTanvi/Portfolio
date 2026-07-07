@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import aboutPhoto from '../assets/remind/headshot.jpg'
 
-// const focus = ['Product Design', 'Product Management', 'Full working rights', 'Sydney']
-
 const fade = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
@@ -104,21 +102,15 @@ export default function About() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.1 }}
       >
-        {/* <span className="about-label">About</span> */}
         <h2 className="about-heading">Hi! I'm Tanvi.</h2>
-        {/* <p className="about-availability">Sydney, Australia · Full working rights</p> */}
         <p className="about-bio">
-            I came to product through code. I started as a programmer, moved into designing products at startups, and completed a Master's of IT (Interaction Design) at UTS, where I worked on design projects end-to-end and researched how designers can use AI in their workflow.
+            I came to product through code. I started as a programmer, moved into designing products at startups, and completed my Master of IT (Interaction Design) at UTS in 2026, where I worked on design projects end-to-end and researched how designers can use AI in their workflow.
         </p>
         <p className="about-bio">
             Over three years across startups and enterprises, I've helped one startup find its path to monetization through user research and product thinking, and helped another land an enterprise pilot within two months of launch.        </p>
         <p className="about-bio">
-            I enjoy taking a product all the way from an idea on a napkin to something real that drives impact for businesses and the people who use it. When I'm not building products, I'm probably cooking, or deep in whatever creative hobby I've picked up that week: pottery, painting, and now vibe coding past my bed time.    </p>
-        {/* <div className="about-tags">
-          {focus.map((f) => (
-            <span key={f} className="about-tag">{f}</span>
-          ))}
-        </div> */}
+            I enjoy taking a product all the way from an idea on a napkin to something real that drives impact for businesses and the people who use it. When I'm not building products, I'm probably cooking, or deep in whatever creative hobby I've picked up that week: pottery, painting, and now vibe coding past my bed time.
+        </p>
       </motion.div>
     </section>
   )

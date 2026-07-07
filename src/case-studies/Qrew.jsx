@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import CaseStudyShell from './shared/CaseStudyShell'
+import LazyVideo from '../components/LazyVideo'
 import g2 from '../assets/qrew/1_group_heart.jpg'
 import g3 from '../assets/qrew/2_solo_award.jpg'
 import g4 from '../assets/qrew/3_group_showcase.jpg'
@@ -20,9 +21,11 @@ const hero = {
 }
 
 const meta = [
+  // TODO(tanvi): confirm your exact role on the 6-person team.
+  { label: 'Role', value: 'Product Designer' },
   { label: 'Timeline', value: '10 weeks' },
-  { label: 'Tools', value: 'Miro · Figma' },
   { label: 'Team', value: '6 members' },
+  { label: 'Tools', value: 'Miro · Figma' },
   { label: 'Outcome', value: 'Highly Commended Award' },
 ]
 
@@ -54,13 +57,12 @@ const outcome = {
   ],
 }
 
-// alt text is a best guess; refine per image. Order is app screens, then the walkthrough, then showcase photos.
 const gallery = [
-  { type: 'image', src: g2, alt: 'A Qrew app screen' },
+  { type: 'image', src: g2, alt: 'The Qrew team together at the showcase' },
   { type: 'video', src: alfVideo, alt: 'A walkthrough of the Qrew app' },
-  { type: 'image', src: g3, alt: 'Qrew at the Interaction Design Showcase' },
-  { type: 'image', src: g4, alt: 'Qrew at the Interaction Design Showcase' },
-  { type: 'image', src: g5, alt: 'Qrew at the Interaction Design Showcase' },
+  { type: 'image', src: g3, alt: 'Tanvi with the Highly Commended Interaction Design award' },
+  { type: 'image', src: g4, alt: 'The Qrew team at the UTS Interaction Design Showcase' },
+  { type: 'image', src: g5, alt: 'Presenting Qrew to judges at the showcase' },
 ]
 
 const sections = [
@@ -70,8 +72,8 @@ const sections = [
   { id: 'outcome', label: 'Outcome' },
 ]
 
-const navPrev = { sublabel: 'Previous case study', label: 'reMind', path: '/work/remind' }
-const navNext = { sublabel: 'Next case study', label: 'First Revenue', path: '/work/first-revenue' }
+const navPrev = { sublabel: 'Previous case study', label: 'First Revenue', path: '/work/first-revenue' }
+const navNext = { sublabel: 'Back to', label: 'Home', path: '/#work' }
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 12 },
@@ -112,13 +114,19 @@ export default function Qrew() {
     el.addEventListener('pointerdown', onDown)
     el.addEventListener('pointermove', onMove)
     window.addEventListener('pointerup', onUp)
+    window.addEventListener('pointercancel', onUp)
 
-    // auto-scroll drift (skipped for reduced motion)
+    // auto-scroll drift — time-based so speed is identical at 60Hz and 120Hz
     let raf
+    let prev = null
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const step = () => {
+      const SPEED = 30 // px per second
+      const step = (ts) => {
+        if (prev == null) prev = ts
+        const dt = ts - prev
+        prev = ts
         if (!pausedRef.current) {
-          el.scrollLeft += 0.5
+          el.scrollLeft += SPEED * (dt / 1000)
           if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft -= el.scrollWidth / 2
         }
         raf = requestAnimationFrame(step)
@@ -130,6 +138,7 @@ export default function Qrew() {
       el.removeEventListener('pointerdown', onDown)
       el.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('pointercancel', onUp)
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
@@ -188,7 +197,7 @@ export default function Qrew() {
         }
         .overview-meta {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(5, 1fr);
           gap: 2rem;
           padding: 2rem 0 0;
           border-top: 1px solid var(--border);
@@ -301,7 +310,7 @@ export default function Qrew() {
           align-items: center;
           gap: 1rem 1.5rem;
         }
-        .wip-note-text { font-size: 14px; color: #e5484d; letter-spacing: -0.005em; }
+        .wip-note-text { font-size: 14px; color: var(--text-muted); font-style: italic; letter-spacing: -0.005em; }
 
         @media (max-width: 900px) {
           .overview-meta { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -390,9 +399,9 @@ export default function Qrew() {
             {[...gallery, ...gallery].map((item, i) => (
               <figure key={i} aria-hidden={i >= gallery.length ? true : undefined}>
                 {item.type === 'video' ? (
-                  <video src={item.src} autoPlay loop muted playsInline aria-label={item.alt} />
+                  <LazyVideo src={item.src} ariaLabel={item.alt} />
                 ) : (
-                  <img src={item.src} alt={item.alt} />
+                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
                 )}
               </figure>
             ))}

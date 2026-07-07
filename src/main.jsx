@@ -4,10 +4,9 @@ import App from './App.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import './index.css'
 
-document.documentElement.setAttribute('data-theme', 'dark')
-
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+    <a href="#main" className="skip-link">Skip to content</a>
     <CustomCursor />
     <App />
   </BrowserRouter>

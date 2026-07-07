@@ -1,12 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { TbArrowLeft, TbArrowRight } from 'react-icons/tb'
+import { TbArrowLeft, TbArrowRight, TbMail, TbBrandLinkedin, TbFileText } from 'react-icons/tb'
+import { EMAIL, LINKEDIN_URL, RESUME_URL } from '../../constants'
 
 export default function CaseStudyShell({ sections, prev, next, children }) {
   const flatSections = sections.flatMap((s) => s.children || [s])
   const indexMap = Object.fromEntries(flatSections.map((item, i) => [item.id, i + 1]))
 
   const [activeSection, setActiveSection] = useState(flatSections[0]?.id)
+  const mobileTocRef = useRef(null)
+
+  // Keep the active pill in view: as the reader scrolls into a later section,
+  // slide the mobile TOC bar right so the highlighted pill stays centred.
+  useEffect(() => {
+    const bar = mobileTocRef.current
+    if (!bar) return
+    const active = bar.querySelector('.mobile-toc-pill.active')
+    if (!active) return
+    const target = active.offsetLeft - bar.clientWidth / 2 + active.clientWidth / 2
+    bar.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
+  }, [activeSection])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,12 +106,85 @@ export default function CaseStudyShell({ sections, prev, next, children }) {
           min-height: calc(100vh - 6rem);
         }
         .case-study-body { flex: 1 0 auto; min-width: 0; }
+
+        /* Mobile section nav — desktop TOC is hidden below 900px, so give phones
+           a sticky, swipeable row of section pills with the same active state. */
+        .case-study-mobile-toc { display: none; }
+        @media (max-width: 900px) {
+          .case-study-mobile-toc {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            position: sticky;
+            top: 4.75rem;
+            z-index: 50;
+            margin: 0 -2rem 1.75rem;
+            padding: 1.1rem 2rem;
+            background: color-mix(in srgb, var(--bg-face) 82%, transparent);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+          }
+          .case-study-mobile-toc::-webkit-scrollbar { display: none; }
+          .mobile-toc-pill {
+            flex: 0 0 auto;
+            font: inherit;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--text-muted);
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            padding: 0.6rem 1.1rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.2s ease, border-color 0.2s ease;
+          }
+          .mobile-toc-pill.active { color: var(--text); border-color: var(--text); }
+        }
+        @media (max-width: 720px) {
+          .case-study-mobile-toc { margin: 0 -1.5rem 1.75rem; padding: 1.1rem 1.5rem; top: 4.25rem; }
+        }
+        .case-study-contact {
+          margin-top: 4rem;
+          padding-top: 3rem;
+          border-top: 1px solid var(--border);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.75rem 2rem;
+        }
+        .case-study-contact-label {
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          opacity: 0.7;
+        }
+        .case-study-contact-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+        }
+        .case-study-contact-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          color: var(--text);
+          font-size: 0.9375rem;
+          letter-spacing: -0.01em;
+          transition: opacity 0.2s ease;
+        }
+        .case-study-contact-link:hover { opacity: 0.6; }
         .case-study-nav {
           display: flex;
           justify-content: space-between;
           align-items: center;
           padding: 4rem 0 2em;
-          margin-top: 4rem;
+          margin-top: 2rem;
           border-top: 1px solid var(--border);
           gap: 2rem;
         }
@@ -139,7 +225,7 @@ export default function CaseStudyShell({ sections, prev, next, children }) {
           .case-study-toc { display: none; }
         }
         @media (max-width: 720px) {
-          .case-study-shell { padding: 4rem 1.5rem 0; }
+          .case-study-shell { padding: 4.5rem 1.5rem 0; }
           .case-study-nav { flex-direction: column; align-items: stretch; gap: 2rem; }
           .case-study-nav-next { align-items: flex-start; }
         }
@@ -180,7 +266,35 @@ export default function CaseStudyShell({ sections, prev, next, children }) {
       </aside>
 
       <div className="case-study-content">
+        <nav className="case-study-mobile-toc" aria-label="Sections" ref={mobileTocRef}>
+          {flatSections.map((s) => (
+            <button
+              key={s.id}
+              className={`mobile-toc-pill ${activeSection === s.id ? 'active' : ''}`}
+              onClick={(e) => handleClick(e, s.id)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <div className="case-study-body">{children}</div>
+
+        <div className="case-study-contact">
+          <span className="case-study-contact-label">Liked this?</span>
+          <div className="case-study-contact-links cursor-hover">
+            <a href={`mailto:${EMAIL}`} className="case-study-contact-link">
+              <TbMail size={16} /> {EMAIL}
+            </a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="case-study-contact-link">
+              <TbBrandLinkedin size={16} /> LinkedIn
+            </a>
+            <a href={RESUME_URL} target="_blank" rel="noreferrer" className="case-study-contact-link">
+              <TbFileText size={16} /> Resume
+            </a>
+          </div>
+        </div>
+
         <div className="case-study-nav">
           {prev && (
             <Link to={prev.path} className="case-study-nav-link case-study-nav-prev cursor-hover">

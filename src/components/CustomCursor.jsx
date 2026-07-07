@@ -8,6 +8,9 @@ export default function CustomCursor() {
   const dot = useRef(null)
 
   useEffect(() => {
+    // No cursor to follow on touch devices — skip the rAF loop and listeners.
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
+
     let x = window.innerWidth / 2
     let y = window.innerHeight / 2
     let size = DEFAULT_SIZE

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { TbMail, TbBrandLinkedin } from 'react-icons/tb'
 import VariableProximity from './VariableProximity'
+import { EMAIL, LINKEDIN_URL } from '../constants'
 
 // Cycles a word letter by letter: type it in, hold, erase, type the next.
 function Typewriter({ words, typingSpeed = 90, deletingSpeed = 45, hold = 2000 }) {
@@ -30,10 +31,13 @@ function Typewriter({ words, typingSpeed = 90, deletingSpeed = 45, hold = 2000 }
   }, [text, phase, index, words, typingSpeed, deletingSpeed, hold])
 
   return (
-    <span aria-live="polite">
-      {text}
-      <span className="tw-caret" aria-hidden="true" />
-    </span>
+    <>
+      <span aria-hidden="true">
+        {text}
+        <span className="tw-caret" />
+      </span>
+      <span className="sr-only">Manager and Designer</span>
+    </>
   )
 }
 
@@ -81,6 +85,7 @@ export default function Hero() {
       <style>{`
         .hero-section {
           min-height: 100vh;
+          min-height: 100svh;
           /* top padding ~= navbar height so the gap above the title matches the gap below it (to the bottom row) */
           padding: 5.25rem 4rem 4rem;
           display: flex;
@@ -114,6 +119,11 @@ export default function Hero() {
           animation: tw-blink 1s steps(1) infinite;
         }
         @keyframes tw-blink { 50% { opacity: 0; } }
+        .hero-title-2 { white-space: nowrap; }
+        @media (max-width: 420px) {
+          /* let "Product" and the typed word wrap instead of clipping on narrow phones */
+          .hero-title-2 { white-space: normal; }
+        }
         @media (max-width: 900px) {
           .hero-section { padding: 4.75rem 2rem 3rem; }
         }
@@ -136,7 +146,7 @@ export default function Hero() {
         className="hero-headline"
         style={{ opacity, scale, y }}
       >
-        <motion.h2
+        <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -156,14 +166,14 @@ export default function Hero() {
             radius={300}
             falloff="linear"
           />
-        </motion.h2>
+        </motion.h1>
 
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="cursor-hover"
-          style={{ ...headline, fontSize: 'clamp(2rem, 6.5vw, 5.5rem)', color: 'var(--text)', margin: 0, whiteSpace: 'nowrap' }}
+          className="cursor-hover hero-title-2"
+          style={{ ...headline, fontSize: 'clamp(2rem, 6.5vw, 5.5rem)', color: 'var(--text)', margin: 0 }}
         >
           <VariableProximity
             label="Product"
@@ -206,7 +216,7 @@ export default function Hero() {
           style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}
         >
           <p style={label}>Current</p>
-          <p style={detail}>Masters of IT - Interaction Design, UTS (2026)</p>
+          <p style={detail}>Master of IT (Interaction Design), UTS · 2026</p>
           <p style={detail}>Sydney · Full working rights</p>
         </motion.div>
 
@@ -215,10 +225,10 @@ export default function Hero() {
           style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}
         >
           <p style={label}>Say Hi</p>
-          <a href="mailto:ta.karanth@gmail.com" className="hero-link" style={{ ...detail, display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <TbMail size={16} /> ta.karanth@gmail.com
+          <a href={`mailto:${EMAIL}`} className="hero-link" style={{ ...detail, display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <TbMail size={16} /> {EMAIL}
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hero-link" style={{ ...detail, display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="hero-link" style={{ ...detail, display: 'flex', alignItems: 'center', gap: '6px' }}>
             <TbBrandLinkedin size={16} /> LinkedIn
           </a>
         </motion.div>

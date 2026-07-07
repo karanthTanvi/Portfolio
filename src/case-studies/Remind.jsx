@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import CaseStudyShell from './shared/CaseStudyShell'
+import LazyVideo from '../components/LazyVideo'
 import mindmapSvg from '../assets/remind/mindmap.svg?raw'
 import lotusBlossomImg from '../assets/remind/LotusBlossom.jpg'
-import decisionMatrixImg from '../assets/remind/DecisionMatrix.png'
+import decisionMatrixImg from '../assets/remind/DecisionMatrix.jpg'
 import userFlowSvg from '../assets/remind/UserFlow.svg?raw'
 import lofiFlowSvg from '../assets/remind/LofiBeforeAfter.svg?raw'
 import sessionRealisticImg from '../assets/remind/Realistic.png'
@@ -27,13 +28,13 @@ import v16 from '../assets/remind/16-session-realistic.webm'
 import v17 from '../assets/remind/17-session-ghibli.webm'
 import v18 from '../assets/remind/18-breathing.webm'
 import outcomeShowcase from '../assets/remind/showcase.jpeg'
-import outcomeGroupAward from '../assets/remind/group-award-cropped.png'
-import outcomeAward from '../assets/remind/award-single.png'
+import outcomeGroupAward from '../assets/remind/group-award-cropped.jpg'
+import outcomeAward from '../assets/remind/award-single.jpg'
 import outcomeCert from '../assets/remind/certificate.jpg'
 import outcomeGroup from '../assets/remind/remind-group.JPEG'
-import outcomePresent from '../assets/remind/present.png'
+import outcomePresent from '../assets/remind/present.jpg'
 
-const figmaProto = 'https://www.figma.com/proto/p6YTHr0nKTvk5mkdtR8dq0/remind?node-id=339-5651&viewport=-3413%2C983%2C0.11&t=z2701KwYLVExRs6X-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=339%3A5651&page-id=0%3A1&hide-ui=1https://www.figma.com/proto/p6YTHr0nKTvk5mkdtR8dq0/remind?node-id=339-5651&viewport=-3413%2C983%2C0.11&t=z2701KwYLVExRs6X-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=339%3A5651&page-id=0%3A1&hide-ui=1'
+const figmaProto = 'https://www.figma.com/proto/p6YTHr0nKTvk5mkdtR8dq0/remind?node-id=339-5651&viewport=-3413%2C983%2C0.11&t=z2701KwYLVExRs6X-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=339%3A5651&page-id=0%3A1&hide-ui=1'
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -51,7 +52,7 @@ const sections = [
 ]
 
 const navPrev = { sublabel: 'Back to', label: 'Home', path: '/#work' }
-const navNext = { sublabel: 'Next case study', label: 'Qrew', path: '/work/qrew' }
+const navNext = { sublabel: 'Next case study', label: 'First Revenue', path: '/work/first-revenue' }
 
 const metadata = [
   { label: 'Project', value: 'Apple Foundation Program' },
@@ -69,7 +70,8 @@ const phases = [
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.3 },
   transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
 })
 
@@ -107,8 +109,8 @@ const outcomePhotos = [
   { src: outcomeAward, alt: 'The Best Project Award'},
   { src: outcomeGroupAward, alt: 'The team with the Best Project Award'},
   { src: outcomeCert, alt: 'Best Project Award certificate'},
-  { src: outcomeShowcase, alt:''},
-  { src: outcomePresent, alt:''},
+  { src: outcomeShowcase, alt: 'The reMind team presenting at the UTS Tech Showcase' },
+  { src: outcomePresent, alt: 'Tanvi presenting reMind to showcase attendees' },
 ]
 
 const reflections = [
@@ -150,13 +152,19 @@ export default function Remind() {
     el.addEventListener('pointerdown', onDown)
     el.addEventListener('pointermove', onMove)
     window.addEventListener('pointerup', onUp)
+    window.addEventListener('pointercancel', onUp)
 
-    // auto-scroll drift (skipped for reduced motion)
+    // auto-scroll drift — time-based so speed is identical at 60Hz and 120Hz
     let raf
+    let prev = null
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const step = () => {
+      const SPEED = 30 // px per second
+      const step = (ts) => {
+        if (prev == null) prev = ts
+        const dt = ts - prev
+        prev = ts
         if (!pausedRef.current) {
-          el.scrollLeft += 0.5
+          el.scrollLeft += SPEED * (dt / 1000)
           if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft -= el.scrollWidth / 2
         }
         raf = requestAnimationFrame(step)
@@ -168,6 +176,7 @@ export default function Remind() {
       el.removeEventListener('pointerdown', onDown)
       el.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('pointercancel', onUp)
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
@@ -797,7 +806,7 @@ export default function Remind() {
         </motion.p>
 
         <motion.figure className="case-image" {...fadeUp(0.2)}>
-          <img src={lotusBlossomImg} alt="Lotus Blossom brainstorming wall with 70+ ideas mapped out" />
+          <img src={lotusBlossomImg} alt="Lotus Blossom brainstorming wall with 70+ ideas mapped out" loading="lazy" decoding="async" />
           <figcaption>Lotus Blossom: 8 sub-ideas around each main idea, then 8 around each of those.</figcaption>
         </motion.figure>
 
@@ -810,7 +819,7 @@ export default function Remind() {
         </motion.p>
 
         <motion.figure className="case-image" {...fadeUp(0.4)}>
-          <img src={decisionMatrixImg} alt="Decision matrix scoring ideas on impact, feasibility, and brief alignment" />
+          <img src={decisionMatrixImg} alt="Decision matrix scoring ideas on impact, feasibility, and brief alignment" loading="lazy" decoding="async" />
           <figcaption>Decision matrix: every idea scored against the brief.</figcaption>
         </motion.figure>
 
@@ -872,11 +881,11 @@ export default function Remind() {
         <motion.div className="design-comparison" {...fadeUp(0.5)}>
           <figure>
             <span className="compare-label">Hyperrealistic</span>
-            <img src={sessionRealisticImg} alt="Session screen with a photorealistic avatar" />
+            <img src={sessionRealisticImg} alt="Session screen with a photorealistic avatar" loading="lazy" decoding="async" />
           </figure>
           <figure>
             <span className="compare-label">Ghibli</span>
-            <img src={sessionGhibliImg} alt="Session screen with a Ghibli-style illustrated avatar" />
+            <img src={sessionGhibliImg} alt="Session screen with a Ghibli-style illustrated avatar" loading="lazy" decoding="async" />
           </figure>
         </motion.div>
         <motion.p className="cs-body" {...fadeUp(0.55)}>
@@ -897,9 +906,9 @@ export default function Remind() {
           {finalScreens.map((s, i) => (
             <motion.figure key={s.alt} {...fadeUp(0.1 + i * 0.04)}>
               {s.type === 'video' ? (
-                <video src={s.src} autoPlay loop muted playsInline aria-label={s.alt} />
+                <LazyVideo src={s.src} ariaLabel={s.alt} />
               ) : (
-                <img src={s.src} alt={s.alt} />
+                <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
               )}
             </motion.figure>
           ))}
@@ -933,7 +942,7 @@ export default function Remind() {
           <div className="outcome-track">
             {[...outcomePhotos, ...outcomePhotos].map((p, i) => (
               <figure key={i} aria-hidden={i >= outcomePhotos.length ? true : undefined}>
-                <img src={p.src} alt={p.alt} />
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
               </figure>
             ))}
           </div>

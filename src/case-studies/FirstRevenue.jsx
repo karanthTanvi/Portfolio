@@ -173,8 +173,8 @@ const sections = [
   { id: 'takeaways', label: 'Takeaways' },
 ]
 
-const navPrev = { sublabel: 'Previous case study', label: 'Qrew', path: '/work/qrew' }
-const navNext = { sublabel: 'Next case study', label: 'Wishcake', path: '/work/wishcake' }
+const navPrev = { sublabel: 'Previous case study', label: 'reMind', path: '/work/remind' }
+const navNext = { sublabel: 'Next case study', label: 'Qrew', path: '/work/qrew' }
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 12 },
@@ -723,16 +723,16 @@ export default function FirstRevenue() {
         /* killed badge: red label and cross mark */
         .bet-decision.killed {
           font-size: 10px;
-          font-weight: 500;
+          font-weight: 600;
           letter-spacing: 0.1em;
-          color: #e5484d;
+          color: var(--danger);
         }
         /* kept badge: green label and tick mark */
         .bet-decision.kept {
           font-size: 10px;
-          font-weight: 500;
+          font-weight: 600;
           letter-spacing: 0.1em;
-          color: #30a46c;
+          color: var(--success);
         }
         .bet-learned-block {
           width: 100%;
@@ -1045,7 +1045,7 @@ export default function FirstRevenue() {
           <span className="glance-label">At a glance</span>
 
           <span className="glance-role-key">Role</span>
-          <h2 className="glance-role-value">{atAGlance.role}</h2>
+          <p className="glance-role-value">{atAGlance.role}</p>
           <p className="glance-responsibilities">{atAGlance.responsibilities}</p>
 
           <div className="glance-divider" />

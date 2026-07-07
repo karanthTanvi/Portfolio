@@ -18,16 +18,6 @@ const projects = [
   },
   {
     id: '02',
-    name: 'Qrew',
-    description: 'An award-winning app from the UTS Interaction Design Showcase.',
-    tags: ['Interaction Design', 'Product Design', 'Award-winning'],
-    year: '2024',
-    media: qrewVideo,
-    type: 'video',
-    path: '/work/qrew',
-  },
-  {
-    id: '03',
     name: 'First Revenue',
     description: "Turning a community app that wouldn't monetize into a profitable student-housing business.",
     tags: ['Product Management', 'Product Market Fit', '0-1'],
@@ -37,48 +27,40 @@ const projects = [
     path: '/work/first-revenue',
   },
   {
+    id: '03',
+    name: 'Qrew',
+    description: 'Matches LGBTQ+ people with a buddy so nobody walks into a queer-friendly event alone.',
+    tags: ['Interaction Design', 'Product Design', 'Award-winning'],
+    year: '2024',
+    media: qrewVideo,
+    type: 'video',
+    path: '/work/qrew',
+  },
+  {
     id: '04',
     name: 'Wishcake',
-    description: 'A vibecoded web-app, taken from ideation all the way to hosting.',
+    description: 'A vibecoded birthday-wish web app, taken from ideation all the way to hosting.',
     tags: ['Claude Code', 'Face Tracking', 'Vercel'],
     year: '2025',
     media: wishcakeVideo,
     type: 'video',
     path: '/work/wishcake',
-    externalUrl: 'https://wishcake.vercel.app', // temporary: links to the live app until the case study is built
+    externalUrl: 'https://wishcake.vercel.app', // links to the live app (no separate case study)
   },
-  // Temporarily hidden, uncomment to restore these tiles.
-  // {
-  //   id: '03',
-  //   name: 'AI for Usability Testing',
-  //   description: 'Leveraging artificial intelligence to streamline and enhance the usability testing process.',
-  //   tags: ['AI', 'UX Research', 'Product Design'],
-  //   year: '2024',
-  //   image: null,
-  //   path: '/work/ai-usability',
-  // },
-  // {
-  //   id: '04',
-  //   name: 'Project Four',
-  //   description: 'A short one-line description that explains what the project is about.',
-  //   tags: ['Tag', 'Tag', 'Tag'],
-  //   year: '2023',
-  //   image: null,
-  //   path: '/work/project-four',
-  // },
 ]
 
 const tileVariants = {
   hidden: { opacity: 0, y: 60, scale: 0.92 },
-  visible: {
+  visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
       duration: 0.9,
       ease: [0.22, 1, 0.36, 1],
+      delay: (i % 2) * 0.08,
     },
-  },
+  }),
 }
 
 /* Rekro logo mark, themed from tokens so it inverts cleanly in both modes. */
@@ -184,10 +166,10 @@ function ProjectCard({ project, index }) {
     <motion.div
       className="project-tile"
       variants={tileVariants}
+      custom={index}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ delay: (index % 2) * 0.08 }}
     >
       <Wrapper className="project-card cursor-hover" {...wrapperProps}>
         <div className="tile-visual">
@@ -201,6 +183,7 @@ function ProjectCard({ project, index }) {
               loop
               muted
               playsInline
+              preload="none"
             />
           ) : project.media ? (
             <img src={project.media} alt={project.name} className="project-image" />

@@ -4,7 +4,53 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tanvi</title>
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <title>Tanvi Karanth — Product Designer &amp; Manager</title>
+    <meta
+      name="description"
+      content="Tanvi Karanth is a product designer and manager in Sydney. Award-winning work across reMind, First Revenue, and Qrew — from research to shipped, profitable product."
+    />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tanvi Karanth — Product Designer & Manager" />
+    <meta
+      property="og:description"
+      content="Award-winning product design and management. From research to shipped, profitable product."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tanvi Karanth — Product Designer & Manager" />
+    <meta
+      name="twitter:description"
+      content="Award-winning product design and management. From research to shipped, profitable product."
+    />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- Font: preconnect + preload the stylesheet so the variable font arrives early -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+    />
+
+    <!-- Set theme + page background before first paint to kill the white flash -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || 'dark'
+          document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark')
+        }
+      })()
+    </script>
+    <style>
+      html[data-theme='dark'] { background: #0a0a0a; }
+      html[data-theme='light'] { background: #fafaf7; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

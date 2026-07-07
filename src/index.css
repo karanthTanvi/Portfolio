@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -23,6 +21,8 @@
   --footer-muted: #86868B;
   --navbar-bg: rgba(251, 251, 253, 0.72);
   --selection: #FF6ECF;
+  --danger: #C0392F;
+  --success: #1E7A4E;
 }
 
 [data-theme='dark'] {
@@ -42,10 +42,8 @@
   --footer-muted: #86868B;
   --navbar-bg: rgba(29, 29, 31, 0.72);
   --selection: #FF14B1;
-}
-
-html {
-  scroll-behavior: smooth;
+  --danger: #FF6B6B;
+  --success: #30A46C;
 }
 
 body {
@@ -82,25 +80,12 @@ a {
   background: var(--bg);
 }
 
-.nav-link {
-  position: relative;
-  display: inline-block;
-  padding: 0.5rem 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.014em;
+/* Case studies are long-form reading — give them a solid surface so text never
+   sits directly on the animated shader. The shader stays visible on the home
+   hero and in the page gutters. */
+.case-study-shell {
+  background: var(--bg-face);
 }
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: calc(0.5rem - 2px); left: 0;
-  width: 0; height: 1px;
-  background: var(--text);
-  transition: width 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.nav-link:hover::after { width: 100%; }
 
 .hero-link {
   position: relative;
@@ -111,12 +96,60 @@ a {
 .hero-link::after {
   content: '';
   position: absolute;
-  bottom: -2px; left: 0;
-  width: 0; height: 1px;
+  bottom: -2px; left: 0; right: 0;
+  height: 1px;
   background: var(--text);
-  transition: width 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
 }
-.hero-link:hover::after { width: 100%; }
+.hero-link:hover::after { transform: scaleX(1); }
+
+/* Keyboard focus — visible ring for every interactive element, mirrors the
+   hover affordances the mouse cursor gets. */
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — first tab stop, hidden until focused. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  z-index: 100000;
+  background: var(--bg-face);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.1rem;
+  border-radius: 0 0 12px 12px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+  outline-offset: -2px;
+}
+
+/* 404 */
+.not-found {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+.not-found h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.not-found p { color: var(--text-muted); }
 
 .sr-only {
   position: absolute;
@@ -128,4 +161,37 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Belt-and-suspenders: honour reduced motion even for non-framer CSS animation. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print / save-as-PDF: force readable light values, drop the chrome and shader
+   (which don't print) so a case study exports as clean black-on-white. */
+@media print {
+  :root, [data-theme='dark'] {
+    --bg: #fff;
+    --bg-face: #fff;
+    --surface-secondary: #f4f4ef;
+    --text: #111;
+    --text-muted: #444;
+    --border: #ccc;
+    --hairline: #ddd;
+  }
+  body { background: #fff !important; color: #111 !important; }
+  .custom-cursor,
+  .shader-bg,
+  .nav-bar,
+  .skip-link,
+  .case-study-toc,
+  .case-study-mobile-toc,
+  .case-study-nav { display: none !important; }
+  .case-study-shell { padding-top: 1rem; }
 }

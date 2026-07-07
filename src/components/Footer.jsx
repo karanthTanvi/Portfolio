@@ -1,10 +1,8 @@
 import { TbBrandLinkedin, TbMail, TbFileText } from 'react-icons/tb'
-
-const RESUME_URL = 'https://drive.google.com/file/d/1l6OC_-RLi5-5fFJYAA_rEMgJh5SyHUsF/view?usp=sharing'
+import { RESUME_URL, LINKEDIN_URL, EMAIL } from '../constants'
 
 export default function Footer() {
-  const toTop = (e) => {
-    e.preventDefault()
+  const toTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -45,7 +43,11 @@ export default function Footer() {
         .back-to-top {
           justify-self: end;
           color: var(--text-muted);
-          text-decoration: none;
+          background: none;
+          border: none;
+          font: inherit;
+          cursor: pointer;
+          padding: 0;
           transition: color 0.2s ease;
         }
         .back-to-top:hover { color: var(--text); }
@@ -65,10 +67,10 @@ export default function Footer() {
       <span className="footer-meta">© 2026 Tanvi Karanth</span>
 
       <div className="footer-links cursor-hover">
-        <a href="mailto:ta.karanth@gmail.com" className="footer-link">
-          <TbMail size={16} /> ta.karanth@gmail.com
+        <a href={`mailto:${EMAIL}`} className="footer-link">
+          <TbMail size={16} /> {EMAIL}
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-link">
+        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="footer-link">
           <TbBrandLinkedin size={16} /> LinkedIn
         </a>
         <a href={RESUME_URL} target="_blank" rel="noreferrer" className="footer-link">
@@ -76,7 +78,7 @@ export default function Footer() {
         </a>
       </div>
 
-      <a href="#" onClick={toTop} className="back-to-top">Back to top ↑</a>
+      <button type="button" onClick={toTop} className="back-to-top cursor-hover">Back to top ↑</button>
     </footer>
   )
 }

@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi'
 import Logo from './Logo'
 import { Link } from 'react-router-dom'
+import { RESUME_URL } from '../constants'
 
 const NAV_ITEMS = ['WORK', 'ABOUT', 'RESUME']
-const RESUME_URL = 'https://drive.google.com/file/d/1cY4sluH99Kqu7IQOaYunURO8U4HfogYW/view?usp=sharing'
 
 // Router-aware Link that can be animated, so mobile menu items navigate home + scroll from any page.
 const MotionLink = motion.create(Link)
@@ -20,9 +20,25 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // iOS Safari ignores overflow:hidden on body for touch scroll, so lock via
+  // position:fixed and restore the scroll position on close.
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (!menuOpen) return
+    const scrollY = window.scrollY
+    const body = document.body
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollY}px`
+    body.style.left = '0'
+    body.style.right = '0'
+    body.style.overflow = 'hidden'
+    return () => {
+      body.style.position = ''
+      body.style.top = ''
+      body.style.left = ''
+      body.style.right = ''
+      body.style.overflow = ''
+      window.scrollTo(0, scrollY)
+    }
   }, [menuOpen])
 
   const goToSection = (e, id) => {
